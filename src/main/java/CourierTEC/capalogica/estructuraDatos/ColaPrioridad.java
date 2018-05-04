@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tda;
+package CourierTEC.capalogica.estructuraDatos;
 
 /**
  *
@@ -18,13 +18,14 @@ public class ColaPrioridad <T>{
         while(n<Tamaño){
           ColaP[n]=new LQueue();
           n++;
+            
         }
     
     }
+
         public void enqueue(T element,int indice){
-        ColaP[indice-1].enqueue(element);
+        ColaP[indice].enqueue(element);
         }
-        
         
         
         public T dequeue(){

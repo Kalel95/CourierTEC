@@ -6,6 +6,7 @@
 package CourierTEC.capalogica.Gestion;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,12 +14,17 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
     int NFicha=0;
+    DefaultTableModel ventanilla1= new DefaultTableModel();
+    private static Fichas t;
     
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        ventanilla1.addColumn("Ventanilla");
+        ventanilla1.addColumn("Estado");
+        jTable1.setModel(ventanilla1);
     }
 
     /**
@@ -52,6 +58,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         ComboBoxT = new javax.swing.JComboBox<>();
         ButtonCantVent = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -154,6 +162,13 @@ public class Principal extends javax.swing.JFrame {
 
         ComboBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perecedero", "NoPerecedero" }));
 
+        ButtonCantVent.setText("Crear");
+        ButtonCantVent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCantVentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -176,6 +191,10 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ComboBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ButtonCantVent, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,20 +214,29 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ButtonCantVent)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(390, 90, 310, 180);
 
-        ButtonCantVent.setText("Crear");
-        ButtonCantVent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCantVentActionPerformed(evt);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        getContentPane().add(ButtonCantVent);
-        ButtonCantVent.setBounds(420, 280, 103, 23);
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(870, 110, 330, 170);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -239,6 +267,7 @@ public class Principal extends javax.swing.JFrame {
         NFicha++;
         Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
                 jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
+        t = NuevaFicha;
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
         
          JOptionPane.showMessageDialog(this, info);
@@ -264,11 +293,18 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
         }
-        String tipoColaE = (String)jComboBox1.getSelectedItem();
-        String tipoColaS = (String)jComboBox2.getSelectedItem();
+        
         cantVEntregas = Integer.parseInt(jTextField1.getText());
         cantVSeguridad = Integer.parseInt(jTextField2.getText());
-        System.out.println(tipoColaE+" "+tipoColaS+" "+cantVEntregas+" "+cantVSeguridad);
+        
+        //crear ventanas en el quisco
+        
+        String Dato[]=new String[2];
+        //Dato[0]= t.getNombre();
+        //Dato[1]=t.getFicha();
+        Dato[0]= "joel";
+        Dato[1]="brenes";
+        ventanilla1.addRow(Dato);
 
     }//GEN-LAST:event_ButtonCantVentActionPerformed
 
@@ -329,6 +365,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
