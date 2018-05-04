@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
     int NFicha=0;
+    
     /**
      * Creates new form Principal
      */
