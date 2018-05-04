@@ -44,10 +44,17 @@ public class Principal extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        FieldE = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        FieldS = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        ComboBoxT = new javax.swing.JComboBox<>();
+        ButtonCantVent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
-        setPreferredSize(new java.awt.Dimension(1370, 750));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -124,6 +131,85 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jComboBox2);
         jComboBox2.setBounds(180, 210, 100, 20);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad de ventanillas"));
+
+        jLabel10.setText("Entregas:");
+
+        FieldE.setToolTipText("");
+        FieldE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldEActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Seguridad:");
+
+        FieldS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldSActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Tipo:");
+
+        ComboBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perecedero", "NoPerecedero" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(53, 53, 53)
+                            .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel11))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ComboBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(390, 90, 310, 180);
+
+        ButtonCantVent.setText("Crear");
+        ButtonCantVent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCantVentActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonCantVent);
+        ButtonCantVent.setBounds(420, 280, 103, 23);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,6 +250,28 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void FieldEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldEActionPerformed
+
+    private void FieldSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldSActionPerformed
+
+    private void ButtonCantVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCantVentActionPerformed
+        int cantVEntregas, cantVSeguridad;
+        if((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
+            return;
+        }
+        String tipoColaE = (String)jComboBox1.getSelectedItem();
+        String tipoColaS = (String)jComboBox2.getSelectedItem();
+        cantVEntregas = Integer.parseInt(jTextField1.getText());
+        cantVSeguridad = Integer.parseInt(jTextField2.getText());
+        System.out.println(tipoColaE+" "+tipoColaS+" "+cantVEntregas+" "+cantVSeguridad);
+
+    }//GEN-LAST:event_ButtonCantVentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,10 +309,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonCantVent;
+    private javax.swing.JComboBox<String> ComboBoxT;
+    private javax.swing.JTextField FieldE;
+    private javax.swing.JTextField FieldS;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -213,6 +328,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
