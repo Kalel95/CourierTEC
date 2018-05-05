@@ -15,6 +15,9 @@ import javax.swing.table.DefaultTableModel;
 public class Principal extends javax.swing.JFrame {
     int NFicha=0;
     DefaultTableModel ventanilla1= new DefaultTableModel();
+    DefaultTableModel ventanilla2= new DefaultTableModel();
+    DefaultTableModel ventanilla3= new DefaultTableModel();
+    DefaultTableModel ventanilla4= new DefaultTableModel();
     private static Fichas t;
     
     /**
@@ -23,8 +26,17 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         ventanilla1.addColumn("Ventanilla");
+        ventanilla2.addColumn("Ventanilla");
+        ventanilla3.addColumn("Ventanilla");
+        ventanilla4.addColumn("Ventanilla");
         ventanilla1.addColumn("Estado");
+        ventanilla2.addColumn("Estado");
+        ventanilla3.addColumn("Estado");
+        ventanilla4.addColumn("Estado");
         jTable1.setModel(ventanilla1);
+        jTable2.setModel(ventanilla2);
+        jTable3.setModel(ventanilla3);
+        jTable4.setModel(ventanilla4);
     }
 
     /**
@@ -55,11 +67,21 @@ public class Principal extends javax.swing.JFrame {
         FieldE = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         FieldS = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        ComboBoxT = new javax.swing.JComboBox<>();
         ButtonCantVent = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        FieldENoP = new javax.swing.JTextField();
+        FieldSNoP = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -158,14 +180,20 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("Tipo:");
-
-        ComboBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perecedero", "NoPerecedero" }));
-
         ButtonCantVent.setText("Crear");
         ButtonCantVent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonCantVentActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Perecederos");
+
+        jLabel13.setText("NoPerecederos");
+
+        FieldENoP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldENoPActionPerformed(evt);
             }
         });
 
@@ -185,12 +213,15 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jLabel11))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ComboBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                            .addComponent(jLabel11)))
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(FieldENoP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                        .addComponent(FieldSNoP, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addGap(50, 50, 50))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ButtonCantVent, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,28 +230,28 @@ public class Principal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonCantVent)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(390, 90, 310, 180);
+        jPanel1.setBounds(390, 90, 310, 210);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,7 +267,63 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(870, 110, 330, 170);
+        jScrollPane1.setBounds(760, 120, 330, 170);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(1100, 120, 330, 170);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(20, 410, 330, 170);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable4);
+
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(380, 410, 330, 170);
+
+        jLabel14.setText("Perecederos");
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(850, 90, 70, 20);
+
+        jLabel15.setText("NoPerecederos");
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(1240, 90, 80, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -288,25 +375,53 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldSActionPerformed
 
     private void ButtonCantVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCantVentActionPerformed
-        int cantVEntregas, cantVSeguridad;
-        if((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) {
+        int cantVEntregas, cantVENoP, cantVSeguridad, cantVSNop;
+        int cont1=0, cont2=0, cont3=0, cont4=0;
+        if(((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) || ((FieldENoP.getText() == null || FieldENoP.getText().equals("")) || (FieldSNoP.getText() == null || FieldSNoP.getText().equals("")))) {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
         }
         
-        cantVEntregas = Integer.parseInt(jTextField1.getText());
-        cantVSeguridad = Integer.parseInt(jTextField2.getText());
+        cantVEntregas = Integer.parseInt(FieldE.getText());
+        cantVENoP = Integer.parseInt(FieldENoP.getText());
+        cantVSeguridad = Integer.parseInt(FieldS.getText());
+        cantVSNop = Integer.parseInt(FieldSNoP.getText());
         
         //crear ventanas en el quisco
-        
-        String Dato[]=new String[2];
-        //Dato[0]= t.getNombre();
-        //Dato[1]=t.getFicha();
-        Dato[0]= "joel";
-        Dato[1]="brenes";
-        ventanilla1.addRow(Dato);
+        while(cont1<cantVEntregas) {
+            String Dato[]=new String[2];
+            Dato[0]= "Ventanilla "+cont1;
+            Dato[1]="";
+            ventanilla1.addRow(Dato);
+            cont1++;
+        }
+        while(cont2<cantVENoP) {
+            String Dato[]=new String[2];
+            Dato[0]= "Ventanilla "+cont2;
+            Dato[1]="";
+            ventanilla2.addRow(Dato);
+            cont2++;
+        }
+        while(cont3<cantVSeguridad) {
+            String Dato[]=new String[2];
+            Dato[0]= "Ventanilla "+cont3;
+            Dato[1]="";
+            ventanilla3.addRow(Dato);
+            cont3++;
+        }
+        while(cont4<cantVSNop) {
+            String Dato[]=new String[2];
+            Dato[0]= "Ventanilla "+cont4;
+            Dato[1]="";
+            ventanilla4.addRow(Dato);
+            cont4++;
+        }
 
     }//GEN-LAST:event_ButtonCantVentActionPerformed
+
+    private void FieldENoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldENoPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldENoPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,16 +461,20 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCantVent;
-    private javax.swing.JComboBox<String> ComboBoxT;
     private javax.swing.JTextField FieldE;
+    private javax.swing.JTextField FieldENoP;
     private javax.swing.JTextField FieldS;
+    private javax.swing.JTextField FieldSNoP;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -366,7 +485,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
