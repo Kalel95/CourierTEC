@@ -82,6 +82,8 @@ public class Principal extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        Atender1 = new javax.swing.JButton();
+        Liberar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -102,7 +104,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel4.setText("Entregas");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(1000, 80, 70, 14);
+        jLabel4.setBounds(990, 60, 70, 14);
 
         jLabel5.setText("Administración");
         getContentPane().add(jLabel5);
@@ -255,45 +257,45 @@ public class Principal extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ventanilla", "Estado"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(760, 120, 330, 170);
+        jScrollPane1.setBounds(710, 120, 230, 170);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ventanilla", "Estado"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(1100, 120, 330, 170);
+        jScrollPane2.setBounds(960, 120, 230, 170);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ventanilla", "Estado"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
@@ -303,13 +305,13 @@ public class Principal extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Ventanilla", "Estado"
             }
         ));
         jScrollPane4.setViewportView(jTable4);
@@ -319,11 +321,24 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel14.setText("Perecederos");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(850, 90, 70, 20);
+        jLabel14.setBounds(800, 90, 70, 20);
 
         jLabel15.setText("NoPerecederos");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(1240, 90, 80, 20);
+        jLabel15.setBounds(1050, 80, 80, 20);
+
+        Atender1.setText("Atender");
+        Atender1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Atender1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Atender1);
+        Atender1.setBounds(730, 310, 71, 23);
+
+        Liberar1.setText("Liberar");
+        getContentPane().add(Liberar1);
+        Liberar1.setBounds(830, 310, 65, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -376,7 +391,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void ButtonCantVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCantVentActionPerformed
         int cantVEntregas, cantVENoP, cantVSeguridad, cantVSNop;
-        int cont1=0, cont2=0, cont3=0, cont4=0;
+        int cont1=1, cont2=1, cont3=1, cont4=1;
         if(((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) || ((FieldENoP.getText() == null || FieldENoP.getText().equals("")) || (FieldSNoP.getText() == null || FieldSNoP.getText().equals("")))) {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
@@ -388,28 +403,28 @@ public class Principal extends javax.swing.JFrame {
         cantVSNop = Integer.parseInt(FieldSNoP.getText());
         
         //crear ventanas en el quisco
-        while(cont1<cantVEntregas) {
+        while(cont1<=cantVEntregas) {
             String Dato[]=new String[2];
             Dato[0]= "Ventanilla "+cont1;
-            Dato[1]="";
+            Dato[1]=t.getFicha();
             ventanilla1.addRow(Dato);
             cont1++;
         }
-        while(cont2<cantVENoP) {
+        while(cont2<=cantVENoP) {
             String Dato[]=new String[2];
             Dato[0]= "Ventanilla "+cont2;
             Dato[1]="";
             ventanilla2.addRow(Dato);
             cont2++;
         }
-        while(cont3<cantVSeguridad) {
+        while(cont3<=cantVSeguridad) {
             String Dato[]=new String[2];
             Dato[0]= "Ventanilla "+cont3;
             Dato[1]="";
             ventanilla3.addRow(Dato);
             cont3++;
         }
-        while(cont4<cantVSNop) {
+        while(cont4<=cantVSNop) {
             String Dato[]=new String[2];
             Dato[0]= "Ventanilla "+cont4;
             Dato[1]="";
@@ -422,6 +437,10 @@ public class Principal extends javax.swing.JFrame {
     private void FieldENoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldENoPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldENoPActionPerformed
+
+    private void Atender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Atender1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,11 +479,13 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Atender1;
     private javax.swing.JButton ButtonCantVent;
     private javax.swing.JTextField FieldE;
     private javax.swing.JTextField FieldENoP;
     private javax.swing.JTextField FieldS;
     private javax.swing.JTextField FieldSNoP;
+    private javax.swing.JButton Liberar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
