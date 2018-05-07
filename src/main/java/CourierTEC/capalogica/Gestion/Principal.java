@@ -33,10 +33,38 @@ public class Principal extends javax.swing.JFrame {
         ventanilla2.addColumn("Estado");
         ventanilla3.addColumn("Estado");
         ventanilla4.addColumn("Estado");
+        ventanilla1.addColumn("Ficha");
+        ventanilla2.addColumn("Ficha");
+        ventanilla3.addColumn("Ficha");
+        ventanilla4.addColumn("Ficha");
         jTable1.setModel(ventanilla1);
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
         jTable4.setModel(ventanilla4);
+    }
+    
+    void AtenderE1() {
+        int renglon = jTable1.getSelectedRow();
+        ventanilla1.setValueAt("Atendiendo", renglon, 1);
+        ventanilla1.setValueAt("Ficha201", renglon, 2);
+    }
+    
+    void AtenderE2() {
+        int renglon = jTable2.getSelectedRow();
+        ventanilla2.setValueAt("Atendiendo", renglon, 1);
+        ventanilla2.setValueAt("Ficha201", renglon, 2);
+    }
+    
+    void LiberarE1() {
+        int renglon = jTable1.getSelectedRow();
+        ventanilla1.setValueAt("Libre", renglon, 1);
+        ventanilla1.setValueAt("Vacio", renglon, 2);
+    }
+    
+    void LiberarE2() {
+        int renglon = jTable2.getSelectedRow();
+        ventanilla2.setValueAt("Libre", renglon, 1);
+        ventanilla2.setValueAt("Vacio", renglon, 2);
     }
 
     /**
@@ -84,6 +112,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         Atender1 = new javax.swing.JButton();
         Liberar1 = new javax.swing.JButton();
+        Atender2 = new javax.swing.JButton();
+        Liberar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -269,7 +299,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(710, 120, 230, 170);
+        jScrollPane1.setBounds(710, 120, 300, 170);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -285,7 +315,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(960, 120, 230, 170);
+        jScrollPane2.setBounds(1030, 120, 280, 170);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -337,8 +367,31 @@ public class Principal extends javax.swing.JFrame {
         Atender1.setBounds(730, 310, 71, 23);
 
         Liberar1.setText("Liberar");
+        Liberar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Liberar1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Liberar1);
-        Liberar1.setBounds(830, 310, 65, 23);
+        Liberar1.setBounds(870, 310, 65, 23);
+
+        Atender2.setText("Atender");
+        Atender2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Atender2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Atender2);
+        Atender2.setBounds(1070, 310, 71, 23);
+
+        Liberar2.setText("Liberar");
+        Liberar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Liberar2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Liberar2);
+        Liberar2.setBounds(1210, 310, 65, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -404,30 +457,34 @@ public class Principal extends javax.swing.JFrame {
         
         //crear ventanas en el quisco
         while(cont1<=cantVEntregas) {
-            String Dato[]=new String[2];
+            String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont1;
-            Dato[1]=t.getFicha();
+            Dato[1]="";
+            Dato[2]="";
             ventanilla1.addRow(Dato);
             cont1++;
         }
         while(cont2<=cantVENoP) {
-            String Dato[]=new String[2];
+            String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont2;
             Dato[1]="";
+            Dato[2]="";
             ventanilla2.addRow(Dato);
             cont2++;
         }
         while(cont3<=cantVSeguridad) {
-            String Dato[]=new String[2];
+            String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont3;
             Dato[1]="";
+            Dato[2]="";
             ventanilla3.addRow(Dato);
             cont3++;
         }
         while(cont4<=cantVSNop) {
-            String Dato[]=new String[2];
+            String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont4;
             Dato[1]="";
+            Dato[2]="";
             ventanilla4.addRow(Dato);
             cont4++;
         }
@@ -440,7 +497,23 @@ public class Principal extends javax.swing.JFrame {
 
     private void Atender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender1ActionPerformed
         // TODO add your handling code here:
+        AtenderE1();
     }//GEN-LAST:event_Atender1ActionPerformed
+
+    private void Atender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender2ActionPerformed
+        // TODO add your handling code here:
+        AtenderE2();
+    }//GEN-LAST:event_Atender2ActionPerformed
+
+    private void Liberar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar2ActionPerformed
+        // TODO add your handling code here:
+        LiberarE2();
+    }//GEN-LAST:event_Liberar2ActionPerformed
+
+    private void Liberar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar1ActionPerformed
+        // TODO add your handling code here:
+        LiberarE1();
+    }//GEN-LAST:event_Liberar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,6 +545,7 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Principal().setVisible(true);
             }
@@ -480,12 +554,14 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Atender1;
+    private javax.swing.JButton Atender2;
     private javax.swing.JButton ButtonCantVent;
     private javax.swing.JTextField FieldE;
     private javax.swing.JTextField FieldENoP;
     private javax.swing.JTextField FieldS;
     private javax.swing.JTextField FieldSNoP;
     private javax.swing.JButton Liberar1;
+    private javax.swing.JButton Liberar2;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
