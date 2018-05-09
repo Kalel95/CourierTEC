@@ -5,6 +5,7 @@
  */
 package CourierTEC.capalogica.Gestion;
 
+import CourierTEC.capalogica.estructuraDatos.ColaPrioridad;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +20,13 @@ public class Principal extends javax.swing.JFrame {
     DefaultTableModel ventanilla3= new DefaultTableModel();
     DefaultTableModel ventanilla4= new DefaultTableModel();
     private static Fichas t;
+    ColaPrioridad PrioridadP=new ColaPrioridad(4);
+    ColaPrioridad PrioridadNP=new ColaPrioridad(4);
+    ColaPrioridad Seguridad=new ColaPrioridad(4);
+    ColaPrioridad SeguridadNP=new ColaPrioridad(4);
     
+    
+    Fichas Ficha;
     /**
      * Creates new form Principal
      */
@@ -43,30 +50,7 @@ public class Principal extends javax.swing.JFrame {
         jTable4.setModel(ventanilla4);
     }
     
-    void AtenderE1() {
-        int renglon = jTable1.getSelectedRow();
-        ventanilla1.setValueAt("Atendiendo", renglon, 1);
-        ventanilla1.setValueAt("Ficha201", renglon, 2);
-    }
     
-    void AtenderE2() {
-        int renglon = jTable2.getSelectedRow();
-        ventanilla2.setValueAt("Atendiendo", renglon, 1);
-        ventanilla2.setValueAt("Ficha201", renglon, 2);
-    }
-    
-    void LiberarE1() {
-        int renglon = jTable1.getSelectedRow();
-        ventanilla1.setValueAt("Libre", renglon, 1);
-        ventanilla1.setValueAt("Vacio", renglon, 2);
-    }
-    
-    void LiberarE2() {
-        int renglon = jTable2.getSelectedRow();
-        ventanilla2.setValueAt("Libre", renglon, 1);
-        ventanilla2.setValueAt("Vacio", renglon, 2);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -422,12 +406,16 @@ public class Principal extends javax.swing.JFrame {
         NFicha++;
         Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
                 jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
-        t = NuevaFicha;
-        String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
+        //t = NuevaFicha;
         
-         JOptionPane.showMessageDialog(this, info);
-         jComboBox1.setSelectedIndex(0);
-         jComboBox2.setSelectedIndex(0);
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.setSelectedIndex(0);
+        String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
+        JOptionPane.showMessageDialog(this, info);
+        PrioridadP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
+        Fichas x=(Fichas) PrioridadP.First();
+        System.out.println(x.getFicha());
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -457,6 +445,7 @@ public class Principal extends javax.swing.JFrame {
         
         //crear ventanas en el quisco
         while(cont1<=cantVEntregas) {
+   
             String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont1;
             Dato[1]="";
@@ -496,23 +485,33 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldENoPActionPerformed
 
     private void Atender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender1ActionPerformed
-        // TODO add your handling code here:
-        AtenderE1();
+        
+        Ficha=(Fichas) PrioridadP.dequeue();
+        
+        int reglon = jTable1.getSelectedRow();
+        ventanilla1.setValueAt("Atendiendo", reglon, 1);
+        ventanilla1.setValueAt(Ficha.getFicha(), reglon, 2);
     }//GEN-LAST:event_Atender1ActionPerformed
 
     private void Atender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender2ActionPerformed
-        // TODO add your handling code here:
-        AtenderE2();
+        Ficha=(Fichas) PrioridadP.dequeue();
+        
+        int reglon = jTable2.getSelectedRow();
+        ventanilla2.setValueAt("Atendiendo", reglon, 1);
+        ventanilla2.setValueAt(Ficha.getFicha(), reglon, 2);
     }//GEN-LAST:event_Atender2ActionPerformed
 
     private void Liberar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar2ActionPerformed
-        // TODO add your handling code here:
-        LiberarE2();
+        
+        int renglon = jTable2.getSelectedRow();
+        ventanilla2.setValueAt("Libre", renglon, 1);
+        ventanilla2.setValueAt("-", renglon, 2);
     }//GEN-LAST:event_Liberar2ActionPerformed
 
     private void Liberar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar1ActionPerformed
-        // TODO add your handling code here:
-        LiberarE1();
+        int renglon = jTable1.getSelectedRow();
+        ventanilla1.setValueAt("Libre", renglon, 1);
+        ventanilla1.setValueAt("-", renglon, 2);
     }//GEN-LAST:event_Liberar1ActionPerformed
 
     /**
