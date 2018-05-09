@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Principal extends javax.swing.JFrame {
     int NFicha=0;
+    int NFicha2=0;
     DefaultTableModel ventanilla1= new DefaultTableModel();
     DefaultTableModel ventanilla2= new DefaultTableModel();
     DefaultTableModel ventanilla3= new DefaultTableModel();
@@ -24,7 +25,7 @@ public class Principal extends javax.swing.JFrame {
     ColaPrioridad PrioridadNP=new ColaPrioridad(4);
     ColaPrioridad Seguridad=new ColaPrioridad(4);
     ColaPrioridad SeguridadNP=new ColaPrioridad(4);
-    
+    int cont1=1, cont2=1, cont3=1, cont4=1;
     
     Fichas Ficha;
     /**
@@ -399,12 +400,11 @@ public class Principal extends javax.swing.JFrame {
         else if (jComboBox1.getSelectedIndex()==3)TipoUsuario="E";
         else if (jComboBox1.getSelectedIndex()==4)TipoUsuario="R";
         
-        if(jComboBox2.getSelectedIndex()==1)TipoPaquete="P";
-        else if(jComboBox2.getSelectedIndex()==2)TipoPaquete="NP";
-        
-        String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha;
-        NFicha++;
-        Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
+        if(jComboBox2.getSelectedIndex()==1){
+            TipoPaquete="P";
+            String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha;
+            NFicha++;
+            Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
                 jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
         //t = NuevaFicha;
         
@@ -413,9 +413,27 @@ public class Principal extends javax.swing.JFrame {
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
         JOptionPane.showMessageDialog(this, info);
         PrioridadP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
-        Fichas x=(Fichas) PrioridadP.First();
-        System.out.println(x.getFicha());
-         
+        }
+        else if(jComboBox2.getSelectedIndex()==2){
+            TipoPaquete="NP";
+            String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha2;
+            NFicha2++;
+            Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
+                jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
+        //t = NuevaFicha;
+        
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.setSelectedIndex(0);
+        String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
+        JOptionPane.showMessageDialog(this, info);
+            
+            PrioridadNP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
+        }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -432,7 +450,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void ButtonCantVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCantVentActionPerformed
         int cantVEntregas, cantVENoP, cantVSeguridad, cantVSNop;
-        int cont1=1, cont2=1, cont3=1, cont4=1;
+        
         if(((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) || ((FieldENoP.getText() == null || FieldENoP.getText().equals("")) || (FieldSNoP.getText() == null || FieldSNoP.getText().equals("")))) {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
@@ -444,7 +462,7 @@ public class Principal extends javax.swing.JFrame {
         cantVSNop = Integer.parseInt(FieldSNoP.getText());
         
         //crear ventanas en el quisco
-        while(cont1<=cantVEntregas) {
+        for(int i=0;i<cantVEntregas;i++) {
    
             String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont1;
@@ -453,7 +471,7 @@ public class Principal extends javax.swing.JFrame {
             ventanilla1.addRow(Dato);
             cont1++;
         }
-        while(cont2<=cantVENoP) {
+        for(int i=0;i<cantVENoP;i++) {
             String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont2;
             Dato[1]="";
@@ -461,7 +479,7 @@ public class Principal extends javax.swing.JFrame {
             ventanilla2.addRow(Dato);
             cont2++;
         }
-        while(cont3<=cantVSeguridad) {
+        for(int i=0;i<cantVSeguridad;i++) {
             String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont3;
             Dato[1]="";
@@ -469,7 +487,7 @@ public class Principal extends javax.swing.JFrame {
             ventanilla3.addRow(Dato);
             cont3++;
         }
-        while(cont4<=cantVSNop) {
+        for(int i=0;i<cantVSNop;i++) {
             String Dato[]=new String[3];
             Dato[0]= "Ventanilla "+cont4;
             Dato[1]="";
@@ -485,33 +503,46 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldENoPActionPerformed
 
     private void Atender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender1ActionPerformed
-        
-        Ficha=(Fichas) PrioridadP.dequeue();
-        
+        int Fila=jTable1.getSelectedRow();
+        if (Fila==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
+        else if(Fila>=0){
+            Ficha=(Fichas) PrioridadP.dequeue();              
         int reglon = jTable1.getSelectedRow();
         ventanilla1.setValueAt("Atendiendo", reglon, 1);
         ventanilla1.setValueAt(Ficha.getFicha(), reglon, 2);
+        }
     }//GEN-LAST:event_Atender1ActionPerformed
 
     private void Atender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender2ActionPerformed
-        Ficha=(Fichas) PrioridadP.dequeue();
+        int Fila2=jTable1.getSelectedRow();
+        if (Fila2==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
+        else if(Fila2>=0){
+        Ficha=(Fichas) PrioridadNP.dequeue();
         
         int reglon = jTable2.getSelectedRow();
         ventanilla2.setValueAt("Atendiendo", reglon, 1);
         ventanilla2.setValueAt(Ficha.getFicha(), reglon, 2);
+        }
     }//GEN-LAST:event_Atender2ActionPerformed
 
     private void Liberar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar2ActionPerformed
-        
+        int Fila3=jTable1.getSelectedRow();
+        if (Fila3==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla a liberar");
+        else if(Fila3>=0){
         int renglon = jTable2.getSelectedRow();
         ventanilla2.setValueAt("Libre", renglon, 1);
         ventanilla2.setValueAt("-", renglon, 2);
+        }
     }//GEN-LAST:event_Liberar2ActionPerformed
 
     private void Liberar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar1ActionPerformed
+        int Fila4=jTable1.getSelectedRow();
+        if (Fila4==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla a liberar");
+        else if(Fila4>=0){
         int renglon = jTable1.getSelectedRow();
         ventanilla1.setValueAt("Libre", renglon, 1);
         ventanilla1.setValueAt("-", renglon, 2);
+        }
     }//GEN-LAST:event_Liberar1ActionPerformed
 
     /**
