@@ -19,6 +19,13 @@ public class Fichas {
         this.TipoPaquete=TipoPaquete;
         this.Ficha=Ficha;
     }
+    public Fichas(int TipoUsuario,String Ficha) {
+        this.Nombre= "";
+        this.Correo= "";
+        this.TipoUsuario=TipoUsuario;
+        this.TipoPaquete= 0;
+        this.Ficha=Ficha;
+    }
     
     public void setNombre(String Nombre){
         this.Nombre=Nombre;

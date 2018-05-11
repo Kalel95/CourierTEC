@@ -27,7 +27,7 @@ public class Principal extends javax.swing.JFrame {
     ColaPrioridad SeguridadNP=new ColaPrioridad(4);
     int cont1=1, cont2=1, cont3=1, cont4=1;
     
-    Fichas Ficha;
+    static Fichas Ficha;
     /**
      * Creates new form Principal
      */
@@ -45,6 +45,10 @@ public class Principal extends javax.swing.JFrame {
         ventanilla2.addColumn("Ficha");
         ventanilla3.addColumn("Ficha");
         ventanilla4.addColumn("Ficha");
+        ventanilla1.addColumn("TipoUsuario");
+        ventanilla2.addColumn("TipoUsuario");
+        ventanilla3.addColumn("TipoUsuario");
+        ventanilla4.addColumn("TipoUsuario");
         jTable1.setModel(ventanilla1);
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
@@ -510,6 +514,25 @@ public class Principal extends javax.swing.JFrame {
         int reglon = jTable1.getSelectedRow();
         ventanilla1.setValueAt("Atendiendo", reglon, 1);
         ventanilla1.setValueAt(Ficha.getFicha(), reglon, 2);
+        String TUsuario = "";
+        int infTable = (int) Ficha.getTipoUsuario();
+            switch (infTable) {
+                case 1:
+                    TUsuario = "Discapacitado";
+                    break;
+                case 2:
+                    TUsuario = "Adulto Mayor";
+                    break;
+                case 3:
+                    TUsuario = "Embarazada";
+                    break;
+                case 4:
+                    TUsuario = "Regular";
+                    break;
+                default:
+                    break;
+            }
+        ventanilla1.setValueAt(TUsuario, reglon, 3);
         }
     }//GEN-LAST:event_Atender1ActionPerformed
 
@@ -522,16 +545,56 @@ public class Principal extends javax.swing.JFrame {
         int reglon = jTable2.getSelectedRow();
         ventanilla2.setValueAt("Atendiendo", reglon, 1);
         ventanilla2.setValueAt(Ficha.getFicha(), reglon, 2);
+        String TUsuario = "";
+        int infTable = (int) Ficha.getTipoUsuario();
+            switch (infTable) {
+                case 1:
+                    TUsuario = "Discapacitado";
+                    break;
+                case 2:
+                    TUsuario = "Adulto Mayor";
+                    break;
+                case 3:
+                    TUsuario = "Embarazada";
+                    break;
+                case 4:
+                    TUsuario = "Regular";
+                    break;
+                default:
+                    break;
+            }
+        ventanilla2.setValueAt(TUsuario, reglon, 3);
         }
     }//GEN-LAST:event_Atender2ActionPerformed
 
     private void Liberar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Liberar2ActionPerformed
-        int Fila3=jTable1.getSelectedRow();
+        int Fila3=jTable2.getSelectedRow();
         if (Fila3==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla a liberar");
         else if(Fila3>=0){
         int renglon = jTable2.getSelectedRow();
+        int TUsuario = 0;
+        String infTable = (String) jTable2.getValueAt(Fila3, 3);
+        if( null != infTable) switch (infTable) {
+                case "Discapacitado":
+                    TUsuario = 1;
+                    break;
+                case "Adulto Mayor":
+                    TUsuario = 2;
+                    break;
+                case "Embarazada":
+                    TUsuario = 3;
+                    break;
+                case "Regular":
+                    TUsuario = 4;
+                    break;
+                default:
+                    break;
+            }
+        Fichas FichaS = new Fichas(TUsuario,(String) jTable2.getValueAt(Fila3, 2));
+        SeguridadNP.enqueue(FichaS, TUsuario - 1);
         ventanilla2.setValueAt("Libre", renglon, 1);
         ventanilla2.setValueAt("-", renglon, 2);
+        ventanilla2.setValueAt("-", renglon, 3);
         }
     }//GEN-LAST:event_Liberar2ActionPerformed
 
@@ -540,8 +603,29 @@ public class Principal extends javax.swing.JFrame {
         if (Fila4==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla a liberar");
         else if(Fila4>=0){
         int renglon = jTable1.getSelectedRow();
+        int TUsuario = 0;
+        String infTable = (String) jTable1.getValueAt(Fila4, 3);
+        if( null != infTable) switch (infTable) {
+                case "Discapacitado":
+                    TUsuario = 1;
+                    break;
+                case "Adulto Mayor":
+                    TUsuario = 2;
+                    break;
+                case "Embarazada":
+                    TUsuario = 3;
+                    break;
+                case "Regular":
+                    TUsuario = 4;
+                    break;
+                default:
+                    break;
+            }
+        Fichas FichaS = new Fichas(TUsuario,(String) jTable1.getValueAt(Fila4, 2));
+        Seguridad.enqueue(FichaS, TUsuario - 1);
         ventanilla1.setValueAt("Libre", renglon, 1);
         ventanilla1.setValueAt("-", renglon, 2);
+        ventanilla1.setValueAt("-", renglon, 3);
         }
     }//GEN-LAST:event_Liberar1ActionPerformed
 
