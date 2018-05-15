@@ -53,12 +53,11 @@ public class ColaPrioridad <T>{
             Nueva.enqueue("JOEL", 3);
             Nueva.enqueue("CARLOS", 2);
             Nueva.enqueue("LUIS", 1);
-            System.out.println(Nueva);
-            System.out.println("aparte");
             
+            System.out.println(Nueva.First());
             while(Nueva.First()!=null){
                 String Nueva2=(String) Nueva.dequeue();
-                System.out.println(Nueva2);
+                System.out.println("\n"+Nueva2);
             }
         } 
 

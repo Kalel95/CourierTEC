@@ -16,6 +16,11 @@ import javax.swing.table.DefaultTableModel;
 public class Principal extends javax.swing.JFrame {
     int NFicha=0;
     int NFicha2=0;
+    int CantidadP=0;
+    int CantidadNP=0;
+    String TotalP="";String TotalNP="";   
+    int AtendidosP=0;int AtendidosNP=0;   
+    int TotalD=0;int TotalM=0;int TotalE=0;int TotalR=0;
     DefaultTableModel ventanilla1= new DefaultTableModel();
     DefaultTableModel ventanilla2= new DefaultTableModel();
     DefaultTableModel ventanilla3= new DefaultTableModel();
@@ -26,6 +31,8 @@ public class Principal extends javax.swing.JFrame {
     ColaPrioridad Seguridad=new ColaPrioridad(4);
     ColaPrioridad SeguridadNP=new ColaPrioridad(4);
     int cont1=1, cont2=1, cont3=1, cont4=1;
+    int CDP=0;int CMP=0;int CEP=0;int CRP=0;
+    int CDNP=0;int CMNP=0;int CENP=0;int CRNP=0;
     
     static Fichas Ficha;
     /**
@@ -45,10 +52,10 @@ public class Principal extends javax.swing.JFrame {
         ventanilla2.addColumn("Ficha");
         ventanilla3.addColumn("Ficha");
         ventanilla4.addColumn("Ficha");
-        ventanilla1.addColumn("TipoUsuario");
-        ventanilla2.addColumn("TipoUsuario");
-        ventanilla3.addColumn("TipoUsuario");
-        ventanilla4.addColumn("TipoUsuario");
+        ventanilla1.addColumn("Tipo de Usuario");
+        ventanilla2.addColumn("Tipo de Usuario");
+        ventanilla3.addColumn("Tipo de Usuario");
+        ventanilla4.addColumn("Tipo de Usuario");
         jTable1.setModel(ventanilla1);
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
@@ -103,6 +110,8 @@ public class Principal extends javax.swing.JFrame {
         Liberar1 = new javax.swing.JButton();
         Atender2 = new javax.swing.JButton();
         Liberar2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -136,23 +145,23 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(170, 250, 120, 23);
+        jButton1.setBounds(100, 240, 120, 23);
 
         jLabel6.setText("Nombre:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(70, 120, 50, 14);
+        jLabel6.setBounds(20, 120, 50, 14);
 
         jLabel7.setText("Correo:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(70, 150, 50, 14);
+        jLabel7.setBounds(20, 150, 50, 14);
 
         jLabel8.setText("Tipo de Usuario:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(70, 180, 90, 14);
+        jLabel8.setBounds(20, 180, 90, 14);
 
         jLabel9.setText("Tipo de Paquete:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(70, 210, 90, 14);
+        jLabel9.setBounds(20, 210, 90, 14);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,9 +169,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(180, 120, 100, 20);
+        jTextField1.setBounds(110, 120, 100, 20);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(180, 150, 100, 20);
+        jTextField2.setBounds(110, 150, 100, 20);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo ", "Discapacitado", "Adulto Mayor", "Mujer Embarazada", "Cliente Regular" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +180,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(180, 180, 100, 20);
+        jComboBox1.setBounds(110, 180, 100, 20);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo", "Perecedero", "No perecedero" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +189,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(180, 210, 100, 20);
+        jComboBox2.setBounds(110, 210, 100, 20);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad de ventanillas"));
 
@@ -272,7 +281,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(390, 90, 310, 210);
+        jPanel1.setBounds(230, 90, 310, 210);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -288,7 +297,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(710, 120, 300, 170);
+        jScrollPane1.setBounds(590, 120, 360, 170);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -304,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(1030, 120, 280, 170);
+        jScrollPane2.setBounds(960, 120, 350, 170);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -362,7 +371,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Liberar1);
-        Liberar1.setBounds(870, 310, 65, 23);
+        Liberar1.setBounds(870, 310, 80, 23);
 
         Atender2.setText("Atender");
         Atender2.addActionListener(new java.awt.event.ActionListener() {
@@ -380,7 +389,25 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Liberar2);
-        Liberar2.setBounds(1210, 310, 65, 23);
+        Liberar2.setBounds(1185, 310, 90, 23);
+
+        jButton3.setText("Estado de Colas");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(840, 420, 130, 23);
+
+        jButton2.setText("Estadisticas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(840, 480, 130, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -399,26 +426,51 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Debe seleccionar un tipo de Usuario y Paquete");
             return;
         }
-        if(jComboBox1.getSelectedIndex()==1)TipoUsuario="D";
-        else if (jComboBox1.getSelectedIndex()==2)TipoUsuario="M";
-        else if (jComboBox1.getSelectedIndex()==3)TipoUsuario="E";
-        else if (jComboBox1.getSelectedIndex()==4)TipoUsuario="R";
+        if(jComboBox1.getSelectedIndex()==1){
+            TipoUsuario="D";
+            TotalD++;
+        }
+        else if (jComboBox1.getSelectedIndex()==2){
+            TipoUsuario="M";
+            TotalM++;
+        }
+        else if (jComboBox1.getSelectedIndex()==3){
+            TipoUsuario="E";
+            TotalE++;
+        }
+        else if (jComboBox1.getSelectedIndex()==4){
+            TipoUsuario="R";
+            TotalR++;
+        }
         
         if(jComboBox2.getSelectedIndex()==1){
+            if(jComboBox1.getSelectedIndex()==1) CDP++;
+            else if (jComboBox1.getSelectedIndex()==2)CMP++;
+            else if (jComboBox1.getSelectedIndex()==3)CEP++;
+            else if (jComboBox1.getSelectedIndex()==4)CRP++;
             TipoPaquete="P";
             String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha;
             NFicha++;
             Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
                 jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
         //t = NuevaFicha;
+            CantidadP++;
         
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
         JOptionPane.showMessageDialog(this, info);
         PrioridadP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
+        TotalP+="\n "+NuevaFicha.getFicha();
+        AtendidosP+=1;
+       
+        
         }
         else if(jComboBox2.getSelectedIndex()==2){
+            if(jComboBox1.getSelectedIndex()==1) CDNP++;
+            else if (jComboBox1.getSelectedIndex()==2)CMNP++;
+            else if (jComboBox1.getSelectedIndex()==3)CENP++;
+            else if (jComboBox1.getSelectedIndex()==4)CRNP++;
             TipoPaquete="NP";
             String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha2;
             NFicha2++;
@@ -431,7 +483,10 @@ public class Principal extends javax.swing.JFrame {
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
         JOptionPane.showMessageDialog(this, info);
             
-            PrioridadNP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
+        PrioridadNP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
+        CantidadNP++;
+        TotalNP+="\n "+NuevaFicha.getFicha();
+        AtendidosNP+=1;
         }
         
         
@@ -533,6 +588,7 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         ventanilla1.setValueAt(TUsuario, reglon, 3);
+        CantidadP--;
         }
     }//GEN-LAST:event_Atender1ActionPerformed
 
@@ -564,6 +620,7 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         ventanilla2.setValueAt(TUsuario, reglon, 3);
+        CantidadNP--;
         }
     }//GEN-LAST:event_Atender2ActionPerformed
 
@@ -595,6 +652,7 @@ public class Principal extends javax.swing.JFrame {
         ventanilla2.setValueAt("Libre", renglon, 1);
         ventanilla2.setValueAt("-", renglon, 2);
         ventanilla2.setValueAt("-", renglon, 3);
+        
         }
     }//GEN-LAST:event_Liberar2ActionPerformed
 
@@ -626,8 +684,34 @@ public class Principal extends javax.swing.JFrame {
         ventanilla1.setValueAt("Libre", renglon, 1);
         ventanilla1.setValueAt("-", renglon, 2);
         ventanilla1.setValueAt("-", renglon, 3);
+        
         }
+        
     }//GEN-LAST:event_Liberar1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String EstadoP;
+        EstadoP = String.valueOf(CantidadP);
+        String EstadoNP;
+        EstadoNP = String.valueOf(CantidadNP);
+        //PrioridadP.First();
+        
+        String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
+                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP;
+        JOptionPane.showMessageDialog(this, Estados);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String Estadist="Fichas dispensadas en Perecederos:\t  "+AtendidosP+"\nFichas dispensadas en "
+                + "No Perecederos: "+AtendidosNP+"\n"+"\nUsuarios Regulares atendidos:"+TotalR+"\nAdultos mayores atendidos:"+
+                TotalM+"\nUsuarios Discapacitados atendidos:"+TotalD+"\nMujeres embarazadas atendidas:"+TotalE+"\n"+
+                "\nUsuarios atendidos en Perecederos:"+"\nUsuarios Discapacitados atendidos: "+CDP+
+                "\n Adultos Mayores atendidos: "+CMP+"\nMujeres Embarazadas atendidas: "+CEP+"\nUsuarios Regulares atendidos: "+CRP+
+                "\n"+"\nUsuarios atendidos en No Perecederos:"+"\nUsuarios Discapacitados atendidos: "+CDNP+
+                "\n Adultos Mayores atendidos: "+CMNP+"\nMujeres Embarazadas atendidas: "+CENP+"\nUsuarios Regulares atendidos: "+CRNP;
+        
+        JOptionPane.showMessageDialog(this, Estadist);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -677,6 +761,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton Liberar1;
     private javax.swing.JButton Liberar2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
