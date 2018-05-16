@@ -258,9 +258,6 @@
           <Font name="Calibri" size="12" style="1"/>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Configuracion Inicial"/>
-      </AccessibilityProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="250" y="90" width="310" height="200"/>
@@ -346,9 +343,9 @@
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="FieldS" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="FieldSNoP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="FieldSNoP" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="ButtonCantVent" min="-2" max="-2" attributes="0"/>
@@ -800,7 +797,7 @@
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\xvagl\Desktop\DANI\ATI\Algortimos\PROGRAS\PROGRA2\CourierTEC\Imagenes\fondo.jpg"/>
+          <Image iconType="3" name="/CourierTEC/capalogica/GUI/Imagenes/fondo.jpg"/>
         </Property>
       </Properties>
       <Constraints>

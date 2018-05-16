@@ -322,8 +322,8 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FieldS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonCantVent)
@@ -332,7 +332,6 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(250, 90, 310, 200);
-        jPanel1.getAccessibleContext().setAccessibleName("Configuracion Inicial");
 
         jTable1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -530,7 +529,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel21);
         jLabel21.setBounds(1070, 90, 120, 20);
 
-        jLabel16.setIcon(new javax.swing.ImageIcon("C:\\Users\\xvagl\\Desktop\\DANI\\ATI\\Algortimos\\PROGRAS\\PROGRA2\\CourierTEC\\Imagenes\\fondo.jpg")); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CourierTEC/capalogica/GUI/Imagenes/fondo.jpg"))); // NOI18N
         getContentPane().add(jLabel16);
         jLabel16.setBounds(0, 0, 1320, 690);
 
