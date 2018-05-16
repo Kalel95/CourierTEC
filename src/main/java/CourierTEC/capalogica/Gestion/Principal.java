@@ -6,6 +6,8 @@
 package CourierTEC.capalogica.Gestion;
 
 import CourierTEC.capalogica.estructuraDatos.ColaPrioridad;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,6 +35,14 @@ public class Principal extends javax.swing.JFrame {
     int cont1=1, cont2=1, cont3=1, cont4=1;
     int CDP=0;int CMP=0;int CEP=0;int CRP=0;
     int CDNP=0;int CMNP=0;int CENP=0;int CRNP=0;
+    static int rango1=0, rango2=0;
+    
+    Fichas FichaS = new Fichas(3, "Hola");
+    Fichas FichaS1 = new Fichas(2, "Zoids");
+    Fichas FichaS11 = new Fichas(1, "Holis");
+    Fichas FichaS2 = new Fichas(2, "Hola");
+    Fichas FichaS12 = new Fichas(1, "Zoids");
+    Fichas FichaS112 = new Fichas(3, "Holis");
     
     static Fichas Ficha;
     /**
@@ -60,6 +70,94 @@ public class Principal extends javax.swing.JFrame {
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
         jTable4.setModel(ventanilla4);
+    }
+    
+    public class Hilos extends Thread{
+        int  Fila=0;
+        int cola = 0;
+        int  duracion;
+        public Hilos(int cola) {
+            this.cola = cola;
+        }
+        
+        public void run()  {
+            Fichas atendiendo;
+            if (cola==1) {
+                while(Seguridad.First()!=null) {
+                    atendiendo =(Fichas) Seguridad.dequeue();
+                    while(Fila!=ventanilla3.getRowCount()){
+                        if((String) jTable3.getValueAt(Fila, 1) == "Atendiendo") {
+                            Fila++;
+                        }
+                        else {
+                            this.calcularDuracion();
+                            System.out.println(ventanilla3.getRowCount()+"fila");
+                            System.out.println(Fila+"fila");
+                            System.out.println(duracion);
+                            ventanilla3.setValueAt("Atendiendo", Fila, 1);
+                            ventanilla3.setValueAt(atendiendo.getFicha(), Fila, 2);
+                            ventanilla3.setValueAt(atendiendo.getTipoUsuario(), Fila, 3);
+                            jTable3.setModel(ventanilla3);
+                            Fila++;
+                            try {
+                                Thread.sleep(1000*duracion);
+                                ventanilla3.setValueAt("Libre", Fila-1, 1);
+                                ventanilla3.setValueAt("-", Fila-1, 2);
+                                ventanilla3.setValueAt("-", Fila-1, 3);
+                                jTable3.setModel(ventanilla3);
+                            } 
+                            catch (InterruptedException ex) {
+                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            break;
+                        }
+                    }
+                    
+                    System.out.println(atendiendo.getFicha());
+                }
+            }
+            else {
+                while(Seguridad.First()!=null) {
+                    atendiendo =(Fichas) SeguridadNP.dequeue();
+                    while(Fila!=ventanilla4.getRowCount()){
+                        if((String) jTable4.getValueAt(Fila, 1) == "Atendiendo") {
+                            Fila++;
+                        }
+                        else {
+                            this.calcularDuracion();
+                            System.out.println(duracion);
+                            ventanilla4.setValueAt("Atendiendo", Fila, 1);
+                            ventanilla4.setValueAt(atendiendo.getFicha(), Fila, 2);
+                            ventanilla4.setValueAt(atendiendo.getTipoUsuario(), Fila, 3);
+                            jTable4.setModel(ventanilla3);
+                            Fila++;
+                            try {
+                                Thread.sleep(1000*duracion);
+                                ventanilla4.setValueAt("Libre", Fila-1, 1);
+                                ventanilla4.setValueAt("-", Fila-1, 2);
+                                ventanilla4.setValueAt("-", Fila-1, 3);
+                                jTable4.setModel(ventanilla3);
+                            } 
+                            catch (InterruptedException ex) {
+                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            break;
+                        }
+                        
+                    }
+           
+                    System.out.println(atendiendo.getFicha());
+                }
+            }
+        }
+        public final void calcularDuracion() {
+            duracion = ((int) (Math.random() * rango1) + 1) - ((int) (Math.random() * rango2) + 1);
+            if (duracion < 0) {
+                duracion *= -1;
+            } else if (duracion == 0) {
+                duracion++;
+            }
+        }
     }
     
     
@@ -496,6 +594,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButton8.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButton8.setText("Comenzar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton8);
         jButton8.setBounds(800, 550, 100, 25);
 
@@ -633,6 +736,9 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
         }
+        
+        rango1 = Integer.parseInt(jTextField3.getText());
+        rango2 = Integer.parseInt(jTextField4.getText());
         
         cantVEntregas = Integer.parseInt(FieldE.getText());
         cantVENoP = Integer.parseInt(FieldENoP.getText());
@@ -833,6 +939,22 @@ public class Principal extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, Estadist);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        int reglon = 0;
+        Seguridad.enqueue(FichaS, 3);
+        Seguridad.enqueue(FichaS1, 1);
+        Seguridad.enqueue(FichaS11, 2);
+        SeguridadNP.enqueue(FichaS2, 3);
+        SeguridadNP.enqueue(FichaS12, 1);
+        SeguridadNP.enqueue(FichaS112, 2);
+        
+        Hilos hilo = new Hilos(1);
+        Hilos hilo2 = new Hilos(2);
+        hilo.start();
+        hilo2.start();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
