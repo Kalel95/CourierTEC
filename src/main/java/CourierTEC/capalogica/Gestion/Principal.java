@@ -124,7 +124,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -529,10 +528,6 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel21);
         jLabel21.setBounds(1070, 90, 120, 20);
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CourierTEC/capalogica/GUI/Imagenes/fondo.jpg"))); // NOI18N
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(0, 0, 1320, 690);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -818,10 +813,12 @@ public class Principal extends javax.swing.JFrame {
         EstadoP = String.valueOf(CantidadP);
         String EstadoNP;
         EstadoNP = String.valueOf(CantidadNP);
-        //PrioridadP.First();
+        Fichas FichaSig=(Fichas) PrioridadP.First();
+        
         
         String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
-                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP;
+                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+
+                "\nSiguiente en la cola: "+FichaSig.getFicha();
         JOptionPane.showMessageDialog(this, Estados);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -901,7 +898,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
