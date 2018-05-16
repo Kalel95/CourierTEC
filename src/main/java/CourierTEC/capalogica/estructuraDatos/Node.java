@@ -9,7 +9,7 @@ package CourierTEC.capalogica.estructuraDatos;
  *
  * @author Joel
  */
-public class Node<T> {
+public class Node<T>{
 
     //atributos
 
