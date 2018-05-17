@@ -32,14 +32,15 @@ public class Principal extends javax.swing.JFrame {
     ColaPrioridad PrioridadNP=new ColaPrioridad(4);
     ColaPrioridad Seguridad=new ColaPrioridad(4);
     ColaPrioridad SeguridadNP=new ColaPrioridad(4);
+    ColaPrioridad Seguridad1=new ColaPrioridad(2);
     int cont1=1, cont2=1, cont3=1, cont4=1;
     int CDP=0;int CMP=0;int CEP=0;int CRP=0;
     int CDNP=0;int CMNP=0;int CENP=0;int CRNP=0;
     static int rango1=0, rango2=0;
     
-    Fichas FichaS = new Fichas(3, "Hola");
-    Fichas FichaS1 = new Fichas(2, "Zoids");
-    Fichas FichaS11 = new Fichas(1, "Holis");
+    Fichas FichaSP = new Fichas(3, "HolaP");
+    Fichas FichaS1P = new Fichas(2, "ZoidsP");
+    Fichas FichaS11P = new Fichas(1, "HolisP");
     Fichas FichaS2 = new Fichas(2, "Hola");
     Fichas FichaS12 = new Fichas(1, "Zoids");
     Fichas FichaS112 = new Fichas(3, "Holis");
@@ -53,40 +54,38 @@ public class Principal extends javax.swing.JFrame {
         ventanilla1.addColumn("Ventanilla");
         ventanilla2.addColumn("Ventanilla");
         ventanilla3.addColumn("Ventanilla");
-        ventanilla4.addColumn("Ventanilla");
         ventanilla1.addColumn("Estado");
         ventanilla2.addColumn("Estado");
         ventanilla3.addColumn("Estado");
-        ventanilla4.addColumn("Estado");
         ventanilla1.addColumn("Ficha");
         ventanilla2.addColumn("Ficha");
         ventanilla3.addColumn("Ficha");
-        ventanilla4.addColumn("Ficha");
         ventanilla1.addColumn("Tipo de Usuario");
         ventanilla2.addColumn("Tipo de Usuario");
         ventanilla3.addColumn("Tipo de Usuario");
-        ventanilla4.addColumn("Tipo de Usuario");
         jTable1.setModel(ventanilla1);
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
-        jTable4.setModel(ventanilla4);
     }
     
     public class Hilos extends Thread{
         int  Fila=0;
         int cola = 0;
         int  duracion;
-        public Hilos(int cola) {
-            this.cola = cola;
-        }
         
+        @Override
         public void run()  {
-            Fichas atendiendo;
-            if (cola==1) {
-                while(Seguridad.First()!=null) {
-                    atendiendo =(Fichas) Seguridad.dequeue();
-                    while(Fila!=ventanilla3.getRowCount()){
-                        if((String) jTable3.getValueAt(Fila, 1) == "Atendiendo") {
+            ColaPrioridad atendiendo;
+            Fichas atendiendo1;
+            Seguridad1.enqueue(Seguridad, 0);
+            Seguridad1.enqueue(SeguridadNP, 1);
+                while(Seguridad1.First()!=null) {
+                    atendiendo =(ColaPrioridad) Seguridad1.dequeue();
+                    while(atendiendo.First()!=null){
+                        atendiendo1 = (Fichas) atendiendo.dequeue();
+                        if(Fila==ventanilla3.getRowCount()) Fila=0;
+                        while(Fila!=ventanilla3.getRowCount()){
+                        if("Atendiendo".equals((String) jTable3.getValueAt(Fila, 1))) {
                             Fila++;
                         }
                         else {
@@ -95,8 +94,8 @@ public class Principal extends javax.swing.JFrame {
                             System.out.println(Fila+"fila");
                             System.out.println(duracion);
                             ventanilla3.setValueAt("Atendiendo", Fila, 1);
-                            ventanilla3.setValueAt(atendiendo.getFicha(), Fila, 2);
-                            ventanilla3.setValueAt(atendiendo.getTipoUsuario(), Fila, 3);
+                            ventanilla3.setValueAt(atendiendo1.getFicha(), Fila, 2);
+                            ventanilla3.setValueAt(atendiendo1.getTipoUsuario(), Fila, 3);
                             jTable3.setModel(ventanilla3);
                             Fila++;
                             try {
@@ -112,43 +111,9 @@ public class Principal extends javax.swing.JFrame {
                             break;
                         }
                     }
-                    
-                    System.out.println(atendiendo.getFicha());
-                }
-            }
-            else {
-                while(Seguridad.First()!=null) {
-                    atendiendo =(Fichas) SeguridadNP.dequeue();
-                    while(Fila!=ventanilla4.getRowCount()){
-                        if((String) jTable4.getValueAt(Fila, 1) == "Atendiendo") {
-                            Fila++;
-                        }
-                        else {
-                            this.calcularDuracion();
-                            System.out.println(duracion);
-                            ventanilla4.setValueAt("Atendiendo", Fila, 1);
-                            ventanilla4.setValueAt(atendiendo.getFicha(), Fila, 2);
-                            ventanilla4.setValueAt(atendiendo.getTipoUsuario(), Fila, 3);
-                            jTable4.setModel(ventanilla3);
-                            Fila++;
-                            try {
-                                Thread.sleep(1000*duracion);
-                                ventanilla4.setValueAt("Libre", Fila-1, 1);
-                                ventanilla4.setValueAt("-", Fila-1, 2);
-                                ventanilla4.setValueAt("-", Fila-1, 3);
-                                jTable4.setModel(ventanilla3);
-                            } 
-                            catch (InterruptedException ex) {
-                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            break;
-                        }
-                        
+                        System.out.println(atendiendo1.getFicha());
                     }
-           
-                    System.out.println(atendiendo.getFicha());
                 }
-            }
         }
         public final void calcularDuracion() {
             duracion = ((int) (Math.random() * rango1) + 1) - ((int) (Math.random() * rango2) + 1);
@@ -194,16 +159,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         FieldENoP = new javax.swing.JTextField();
         FieldSNoP = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         Atender1 = new javax.swing.JButton();
         Liberar1 = new javax.swing.JButton();
         Atender2 = new javax.swing.JButton();
@@ -215,11 +180,7 @@ public class Principal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
 
@@ -359,42 +320,59 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jLabel18.setText("Tiempo Minimo");
+
+        jLabel19.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jLabel19.setText("Tiempo Miaximo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(24, 24, 24)
+                            .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(17, 17, 17))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12))))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel13)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel13)
+                                .addGap(24, 24, 24))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(ButtonCantVent, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(108, 108, 108)
+                .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(ButtonCantVent, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,12 +401,19 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(FieldS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonCantVent)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonCantVent))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(250, 90, 310, 200);
+        jPanel1.setBounds(250, 90, 310, 230);
 
         jTable1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -479,34 +464,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(60, 480, 330, 170);
-
-        jTable4.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Ventanilla", "Estado"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable4);
-
-        getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(460, 480, 330, 170);
-
-        jLabel14.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel14.setText("Perecederos");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(180, 450, 100, 20);
-
-        jLabel15.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel15.setText("No Perecederos");
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(570, 450, 120, 20);
+        jScrollPane3.setBounds(60, 460, 500, 190);
 
         Atender1.setBackground(new java.awt.Color(255, 0, 0));
         Atender1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
@@ -600,26 +558,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton8);
-        jButton8.setBounds(800, 550, 100, 25);
-
-        jLabel18.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        jLabel18.setText("Tiempo Minimo");
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(260, 300, 80, 16);
+        jButton8.setBounds(610, 550, 100, 25);
 
         jLabel17.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel17.setText("Estructura:");
         getContentPane().add(jLabel17);
         jLabel17.setBounds(380, 340, 60, 16);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(270, 320, 50, 20);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(490, 320, 50, 20);
-
-        jLabel19.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        jLabel19.setText("Tiempo Miaximo");
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(470, 300, 90, 16);
 
         jLabel20.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel20.setText("Perecederos");
@@ -730,9 +674,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldSActionPerformed
 
     private void ButtonCantVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCantVentActionPerformed
-        int cantVEntregas, cantVENoP, cantVSeguridad, cantVSNop;
+        int cantVEntregas, cantVENoP, cantVSeguridad;
         
-        if(((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) || ((FieldENoP.getText() == null || FieldENoP.getText().equals("")) || (FieldSNoP.getText() == null || FieldSNoP.getText().equals("")))) {
+        if(((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) || ((FieldENoP.getText() == null || FieldENoP.getText().equals("")) )) {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
         }
@@ -743,7 +687,6 @@ public class Principal extends javax.swing.JFrame {
         cantVEntregas = Integer.parseInt(FieldE.getText());
         cantVENoP = Integer.parseInt(FieldENoP.getText());
         cantVSeguridad = Integer.parseInt(FieldS.getText());
-        cantVSNop = Integer.parseInt(FieldSNoP.getText());
         
         //crear ventanas en el quisco
         for(int i=0;i<cantVEntregas;i++) {
@@ -770,14 +713,6 @@ public class Principal extends javax.swing.JFrame {
             Dato[2]="";
             ventanilla3.addRow(Dato);
             cont3++;
-        }
-        for(int i=0;i<cantVSNop;i++) {
-            String Dato[]=new String[3];
-            Dato[0]= "Ventanilla "+cont4;
-            Dato[1]="";
-            Dato[2]="";
-            ventanilla4.addRow(Dato);
-            cont4++;
         }
 
     }//GEN-LAST:event_ButtonCantVentActionPerformed
@@ -942,18 +877,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        int reglon = 0;
-        Seguridad.enqueue(FichaS, 3);
-        Seguridad.enqueue(FichaS1, 1);
-        Seguridad.enqueue(FichaS11, 2);
+        Seguridad.enqueue(FichaSP, 3);
+        Seguridad.enqueue(FichaS1P, 1);
+        Seguridad.enqueue(FichaS11P, 2);
         SeguridadNP.enqueue(FichaS2, 3);
         SeguridadNP.enqueue(FichaS12, 1);
         SeguridadNP.enqueue(FichaS112, 2);
         
-        Hilos hilo = new Hilos(1);
-        Hilos hilo2 = new Hilos(2);
+        Hilos hilo = new Hilos();
         hilo.start();
-        hilo2.start();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
@@ -1018,8 +950,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1037,11 +967,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
