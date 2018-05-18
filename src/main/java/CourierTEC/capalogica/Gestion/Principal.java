@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package CourierTEC.capalogica.Gestion;
-
+import CourierTEC.capalogica.Gestion.sms;
 import CourierTEC.capalogica.estructuraDatos.ColaPrioridad;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -189,6 +189,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 750));
@@ -395,8 +396,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(47, 47, 47)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -408,7 +408,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonCantVent))
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -573,6 +573,15 @@ public class Principal extends javax.swing.JFrame {
         jLabel21.setText("No Perecederos");
         getContentPane().add(jLabel21);
         jLabel21.setBounds(1070, 90, 120, 20);
+
+        jButton10.setText("jButton10");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton10);
+        jButton10.setBounds(80, 310, 79, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -905,6 +914,12 @@ public class Principal extends javax.swing.JFrame {
         hilo.start();
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+
+        sms mensaje = new sms();
+        mensaje = EnviarSMS();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+      
     /**
      * @param args the command line arguments
      */
@@ -952,6 +967,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton Liberar1;
     private javax.swing.JButton Liberar2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
