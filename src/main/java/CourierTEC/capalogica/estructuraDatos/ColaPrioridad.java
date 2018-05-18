@@ -11,7 +11,7 @@ package CourierTEC.capalogica.estructuraDatos;
  */
 public class ColaPrioridad <T>{
     LQueue[] ColaP; 
-    
+    //método para crear un arreglo de colas
     public ColaPrioridad(int Tamaño){
         ColaP= new LQueue[Tamaño];
         int n=0;
@@ -22,12 +22,12 @@ public class ColaPrioridad <T>{
         }
     
     }
-
+        //método para agregar objetos al arreglo
         public void enqueue(T element,int indice){
         ColaP[indice].enqueue(element);
         }
         
-        
+        //Método para eliminar un objeto del arreglo de colas(elimina el primero)
         public T dequeue(){
             for (int i=0;ColaP.length>i;i++){
                 if(ColaP[i].size()>0)return (T) ColaP[i].dequeue();
@@ -35,7 +35,7 @@ public class ColaPrioridad <T>{
             }
             return null;
         }
-
+        //Método que retorna el primer objeto en el arreglo de colas
         public T First(){
             for (int i=0;ColaP.length>i;i++){
                 if(ColaP[i].size()>0)return (T) ColaP[i].first();

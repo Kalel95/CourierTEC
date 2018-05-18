@@ -11,7 +11,7 @@ package CourierTEC.capalogica.Gestion;
  */
 public class Fichas {
     String Nombre; String Correo;int TipoUsuario; int TipoPaquete;String Ficha;
-    
+    //Constructores
     public Fichas(String Nombre,String Correo,int TipoUsuario,int TipoPaquete,String Ficha){
         this.Nombre=Nombre;
         this.Correo=Correo;

@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Joel
  */
 public class Principal extends javax.swing.JFrame {
+    //declaración de contadores para asignar el número de ficha
     int NFicha=0;
     int NFicha2=0;
     int CantidadP=0;
@@ -28,22 +29,26 @@ public class Principal extends javax.swing.JFrame {
     DefaultTableModel ventanilla3= new DefaultTableModel();
     DefaultTableModel ventanilla4= new DefaultTableModel();
     private static Fichas t;
+    //creación de colas de prioridad
     ColaPrioridad PrioridadP=new ColaPrioridad(4);
     ColaPrioridad PrioridadNP=new ColaPrioridad(4);
     ColaPrioridad Seguridad=new ColaPrioridad(4);
     ColaPrioridad SeguridadNP=new ColaPrioridad(4);
     ColaPrioridad Seguridad1=new ColaPrioridad(2);
+    //Contadores para saber la cantidad de usuarios atendidos
+    //Por tipo de paquete
     int cont1=1, cont2=1, cont3=1, cont4=1;
     int CDP=0;int CMP=0;int CEP=0;int CRP=0;
     int CDNP=0;int CMNP=0;int CENP=0;int CRNP=0;
     static int rango1=0, rango2=0;
-    
-    Fichas FichaSP = new Fichas(3, "HolaP");
-    Fichas FichaS1P = new Fichas(2, "ZoidsP");
-    Fichas FichaS11P = new Fichas(1, "HolisP");
-    Fichas FichaS2 = new Fichas(2, "Hola");
-    Fichas FichaS12 = new Fichas(1, "Zoids");
-    Fichas FichaS112 = new Fichas(3, "Holis");
+    int AtendidosTP=1; 
+    int AtendidosTNP=1;
+    Fichas FichaSP = new Fichas(4, "Regular");
+    Fichas FichaS1P = new Fichas(3, "Embarazada");
+    Fichas FichaS11P = new Fichas(1, "Adulto");
+    Fichas FichaS2 = new Fichas(4, "Regular");
+    Fichas FichaS12 = new Fichas(1, "Adulto");
+    Fichas FichaS112 = new Fichas(3, "Embarazada");
     
     static Fichas Ficha;
     /**
@@ -63,6 +68,8 @@ public class Principal extends javax.swing.JFrame {
         ventanilla1.addColumn("Tipo de Usuario");
         ventanilla2.addColumn("Tipo de Usuario");
         ventanilla3.addColumn("Tipo de Usuario");
+        ventanilla1.addColumn("Atendidos");
+        ventanilla2.addColumn("Atendidos");
         jTable1.setModel(ventanilla1);
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
@@ -158,7 +165,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         FieldENoP = new javax.swing.JTextField();
-        FieldSNoP = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -332,16 +338,12 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(24, 24, 24)
-                            .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(17, 17, 17))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,10 +351,8 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(40, 40, 40))
+                                .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -377,30 +377,29 @@ public class Principal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel13)
-                            .addGap(79, 79, 79))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(7, 7, 7)
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(44, 44, 44)
-                            .addComponent(jLabel11)
-                            .addGap(6, 6, 6)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FieldS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FieldSNoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
+                        .addComponent(jLabel13)
+                        .addGap(105, 105, 105))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel11))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
@@ -588,10 +587,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String TipoUsuario="",TipoPaquete="";
+        //Verificar que se selecciones el tipo de usuario y paquete
         if (jComboBox1.getSelectedIndex()==0 ||jComboBox2.getSelectedIndex()==0 ){
             JOptionPane.showMessageDialog(null,"Debe seleccionar un tipo de Usuario y Paquete");
             return;
         }
+        //condiciones para asignar-crear la ficha dependiendo del tipo de usuario
         if(jComboBox1.getSelectedIndex()==1){
             TipoUsuario="D";
             TotalD++;
@@ -608,24 +609,27 @@ public class Principal extends javax.swing.JFrame {
             TipoUsuario="R";
             TotalR++;
         }
-        
+        //condiciones para asignar-crear la ficha dependiendo del tipo de paquete
         if(jComboBox2.getSelectedIndex()==1){
             if(jComboBox1.getSelectedIndex()==1) CDP++;
             else if (jComboBox1.getSelectedIndex()==2)CMP++;
             else if (jComboBox1.getSelectedIndex()==3)CEP++;
             else if (jComboBox1.getSelectedIndex()==4)CRP++;
             TipoPaquete="P";
+            //Creación del atributo ficha
             String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha;
             NFicha++;
+            //Creación de ficha con los datos ingresados por el usuario
             Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
                 jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
-        //t = NuevaFicha;
+        
             CantidadP++;
         
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
         JOptionPane.showMessageDialog(this, info);
+        //Agrega el objeto ficha a la cola de acuerdo a su prioridad de usuario
         PrioridadP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
         TotalP+="\n "+NuevaFicha.getFicha();
         AtendidosP+=1;
@@ -638,17 +642,20 @@ public class Principal extends javax.swing.JFrame {
             else if (jComboBox1.getSelectedIndex()==3)CENP++;
             else if (jComboBox1.getSelectedIndex()==4)CRNP++;
             TipoPaquete="NP";
+            //Creación del atributo ficha
             String Ficha=TipoPaquete+"-"+TipoUsuario+"-"+NFicha2;
             NFicha2++;
+            //Creación de ficha con los datos ingresados por el usuario
             Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
                 jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
-        //t = NuevaFicha;
         
+        //Reinicar los botones despegables
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
+        //Mostrar en pantalla la ficha asignada al usuario
         JOptionPane.showMessageDialog(this, info);
-            
+        //Agrega el objeto ficha a la cola de acuerdo a su prioridad de usuario   
         PrioridadNP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
         CantidadNP++;
         TotalNP+="\n "+NuevaFicha.getFicha();
@@ -675,7 +682,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void ButtonCantVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCantVentActionPerformed
         int cantVEntregas, cantVENoP, cantVSeguridad;
-        
+        //Verificar que el usurio ingrese un dato en todos los textfields
         if(((FieldE.getText() == null || FieldE.getText().equals("")) || (FieldS.getText() == null || FieldS.getText().equals(""))) || ((FieldENoP.getText() == null || FieldENoP.getText().equals("")) )) {
             JOptionPane.showMessageDialog(null,"Debe ingresar un numero en los espacios");
             return;
@@ -723,12 +730,16 @@ public class Principal extends javax.swing.JFrame {
 
     private void Atender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender1ActionPerformed
         int Fila=jTable1.getSelectedRow();
+        //indicar que debe seleccionar la ventana donde va a ser atentido el usuario
         if (Fila==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
+        //atender al usuario en la ventana seleccionada
         else if(Fila>=0){
+            //eliminar de la cola al usuario atendido(objeto ficha)
             Ficha=(Fichas) PrioridadP.dequeue();              
         int reglon = jTable1.getSelectedRow();
         ventanilla1.setValueAt("Atendiendo", reglon, 1);
         ventanilla1.setValueAt(Ficha.getFicha(), reglon, 2);
+        ventanilla1.setValueAt(AtendidosTP, reglon, 4);
         String TUsuario = "";
         int infTable = (int) Ficha.getTipoUsuario();
             switch (infTable) {
@@ -749,14 +760,17 @@ public class Principal extends javax.swing.JFrame {
             }
         ventanilla1.setValueAt(TUsuario, reglon, 3);
         CantidadP--;
+        AtendidosTP++;
         }
     }//GEN-LAST:event_Atender1ActionPerformed
 
     private void Atender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender2ActionPerformed
         int Fila2=jTable1.getSelectedRow();
         if (Fila2==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
+        //atender al usuario en la ventana seleccionada
         else if(Fila2>=0){
-        Ficha=(Fichas) PrioridadNP.dequeue();
+            //eliminar de la cola al usuario atendido(objeto ficha)
+            Ficha=(Fichas) PrioridadNP.dequeue();
         
         int reglon = jTable2.getSelectedRow();
         ventanilla2.setValueAt("Atendiendo", reglon, 1);
@@ -781,6 +795,7 @@ public class Principal extends javax.swing.JFrame {
             }
         ventanilla2.setValueAt(TUsuario, reglon, 3);
         CantidadNP--;
+        AtendidosTNP++;
         }
     }//GEN-LAST:event_Atender2ActionPerformed
 
@@ -854,16 +869,18 @@ public class Principal extends javax.swing.JFrame {
         EstadoP = String.valueOf(CantidadP);
         String EstadoNP;
         EstadoNP = String.valueOf(CantidadNP);
-        Fichas FichaSig=(Fichas) PrioridadP.First();
-        
+        Fichas FichaSigP=(Fichas) PrioridadP.First();
+        Fichas FichaSigNP=(Fichas) PrioridadNP.First();
         
         String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
-                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+
-                "\nSiguiente en la cola: "+FichaSig.getFicha();
+                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+"\n"+
+                "\nSiguiente en la cola Perecederos: "+FichaSigP.getFicha()+"\nSiguiente en la cola No Perecederos: "+
+                FichaSigNP.getFicha();
         JOptionPane.showMessageDialog(this, Estados);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Mostrar las estadisticas de usuarios atendidos 
         String Estadist="Fichas dispensadas en Perecederos:\t  "+AtendidosP+"\nFichas dispensadas en "
                 + "No Perecederos: "+AtendidosNP+"\n"+"\nUsuarios Regulares atendidos:"+TotalR+"\nAdultos mayores atendidos:"+
                 TotalM+"\nUsuarios Discapacitados atendidos:"+TotalD+"\nMujeres embarazadas atendidas:"+TotalE+"\n"+
@@ -932,7 +949,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField FieldE;
     private javax.swing.JTextField FieldENoP;
     private javax.swing.JTextField FieldS;
-    private javax.swing.JTextField FieldSNoP;
     private javax.swing.JButton Liberar1;
     private javax.swing.JButton Liberar2;
     private javax.swing.JButton jButton1;
