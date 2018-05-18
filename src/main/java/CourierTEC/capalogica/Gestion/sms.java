@@ -5,26 +5,30 @@
  */
 package CourierTEC.capalogica.Gestion;
 
-//import com.sun.xml.internal.ws.api.message.Message;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
-/**
- *
- * @author xvagl
- */
-public class sms {
-    private void EnviarSMS(String Texto, String Numero){
-	String ACCOUNT_SID = "ACc6785efb7a6e1aa1198ba554af5b449d";
-	     String AUTH_TOKEN = "f06648034582dcd95a8c60d6d7dc730a ";
+ 
+import com.twilio.Twilio; 
+import com.twilio.rest.api.v2010.account.Message; 
+import com.twilio.rest.api.v2010.account.MessageCreator; 
+import com.twilio.type.PhoneNumber; 
+ 
+import java.math.BigDecimal; 
+import java.net.URI; 
+import java.util.ArrayList; 
+import java.util.List; 
+ 
+public class sms { 
+    private final static String ACCOUNT_SID = "ACc6785efb7a6e1aa1198ba554af5b449d"; 
+    private final static String AUTH_TOKEN = "f06648034582dcd95a8c60d6d7dc730a"; 
+ 
+    public static void main(String[] args) { 
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        String Numero = "+50663420702";
+        String Texto = "Hola";
 
-	    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-	    Message message = Message.creator( new PhoneNumber(Numero),new PhoneNumber("+17327332852"),
+	    Message message = Message.creator( new PhoneNumber(Numero),new PhoneNumber("+18603002179"),
 	        
 	        Texto).create();
 
 	    System.out.println(message.getSid());
-	  }
-    
+    } 
 }
