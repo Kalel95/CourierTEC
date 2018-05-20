@@ -11,20 +11,23 @@ package CourierTEC.capalogica.Gestion;
  */
 public class Fichas {
     String Nombre; String Correo;int TipoUsuario; int TipoPaquete;String Ficha;
+    long tiempoE;
     //Constructores
-    public Fichas(String Nombre,String Correo,int TipoUsuario,int TipoPaquete,String Ficha){
+    public Fichas(String Nombre,String Correo,int TipoUsuario,int TipoPaquete,String Ficha,long tiempoE){
         this.Nombre=Nombre;
         this.Correo=Correo;
         this.TipoUsuario=TipoUsuario;
         this.TipoPaquete=TipoPaquete;
         this.Ficha=Ficha;
+        this.tiempoE=tiempoE;
     }
-    public Fichas(int TipoUsuario,String Ficha) {
+    public Fichas(int TipoUsuario,String Ficha,long tiempoE) {
         this.Nombre= "";
         this.Correo= "";
         this.TipoUsuario=TipoUsuario;
         this.TipoPaquete= 0;
         this.Ficha=Ficha;
+        this.tiempoE=tiempoE;
     }
     
     public void setNombre(String Nombre){
@@ -59,5 +62,11 @@ public class Fichas {
     }
     public String getFicha(){
         return this.Ficha;
+    }
+    public long getTiempo() {
+        return this.tiempoE;
+    }
+    public void setTiempo(long tiempoE) {
+        this.tiempoE=tiempoE;
     }
 }

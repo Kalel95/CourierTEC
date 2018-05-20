@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package CourierTEC.capalogica.Gestion;
-import CourierTEC.capalogica.Gestion.sms;
 import CourierTEC.capalogica.estructuraDatos.ColaPrioridad;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,12 +16,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Principal extends javax.swing.JFrame {
     //declaración de contadores para asignar el número de ficha
-    int NFicha=0;
-    int NFicha2=0;
-    int CantidadP=0;
-    int CantidadNP=0;
-    String TotalP="";String TotalNP="";   
-    int AtendidosP=0;int AtendidosNP=0;   
+    int NFicha=0, NFicha2=0,CantidadP=0,CantidadNP=0,AtendidosP=0,AtendidosNP=0;
+    String TotalP="",TotalNP="";      
     int TotalD=0;int TotalM=0;int TotalE=0;int TotalR=0;
     DefaultTableModel ventanilla1= new DefaultTableModel();
     DefaultTableModel ventanilla2= new DefaultTableModel();
@@ -41,14 +36,15 @@ public class Principal extends javax.swing.JFrame {
     int CDP=0;int CMP=0;int CEP=0;int CRP=0;
     int CDNP=0;int CMNP=0;int CENP=0;int CRNP=0;
     static int rango1=0, rango2=0;
+    static long tEPerecedero=0, tENoPerecedero=0, tESeguridad=0;
     int AtendidosTP=1; 
     int AtendidosTNP=1;
-    Fichas FichaSP = new Fichas(4, "Regular");
-    Fichas FichaS1P = new Fichas(3, "Embarazada");
-    Fichas FichaS11P = new Fichas(1, "Adulto");
-    Fichas FichaS2 = new Fichas(4, "Regular");
-    Fichas FichaS12 = new Fichas(1, "Adulto");
-    Fichas FichaS112 = new Fichas(3, "Embarazada");
+    Fichas FichaSP = new Fichas(4, "Regular",System.currentTimeMillis());
+    Fichas FichaS1P = new Fichas(3, "Embarazada",System.currentTimeMillis());
+    Fichas FichaS11P = new Fichas(1, "Adulto",System.currentTimeMillis());
+    Fichas FichaS2 = new Fichas(4, "Regular",System.currentTimeMillis());
+    Fichas FichaS12 = new Fichas(1, "Adulto",System.currentTimeMillis());
+    Fichas FichaS112 = new Fichas(3, "Embarazada",System.currentTimeMillis());
     
     static Fichas Ficha;
     /**
@@ -90,6 +86,8 @@ public class Principal extends javax.swing.JFrame {
                     atendiendo =(ColaPrioridad) Seguridad1.dequeue();
                     while(atendiendo.First()!=null){
                         atendiendo1 = (Fichas) atendiendo.dequeue();
+                        tESeguridad+=((System.currentTimeMillis()-atendiendo1.getTiempo())/1000);
+                        System.out.println(tESeguridad+"tiempo");
                         if(Fila==ventanilla3.getRowCount()) Fila=0;
                         while(Fila!=ventanilla3.getRowCount()){
                         if("Atendiendo".equals((String) jTable3.getValueAt(Fila, 1))) {
@@ -630,7 +628,7 @@ public class Principal extends javax.swing.JFrame {
             NFicha++;
             //Creación de ficha con los datos ingresados por el usuario
             Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
-                jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
+                jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha,System.currentTimeMillis());
         
             CantidadP++;
         
@@ -656,7 +654,7 @@ public class Principal extends javax.swing.JFrame {
             NFicha2++;
             //Creación de ficha con los datos ingresados por el usuario
             Fichas NuevaFicha=new Fichas(jTextField1.getText(),jTextField2.getText(),
-                jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha);
+                jComboBox1.getSelectedIndex(),jComboBox2.getSelectedIndex(),Ficha,System.currentTimeMillis());
         
         //Reinicar los botones despegables
         jComboBox1.setSelectedIndex(0);
@@ -744,7 +742,10 @@ public class Principal extends javax.swing.JFrame {
         //atender al usuario en la ventana seleccionada
         else if(Fila>=0){
             //eliminar de la cola al usuario atendido(objeto ficha)
-            Ficha=(Fichas) PrioridadP.dequeue();              
+            Ficha=(Fichas) PrioridadP.dequeue();
+            tEPerecedero+=((System.currentTimeMillis()-Ficha.getTiempo())/1000);
+            System.out.println(tEPerecedero);
+            
         int reglon = jTable1.getSelectedRow();
         ventanilla1.setValueAt("Atendiendo", reglon, 1);
         ventanilla1.setValueAt(Ficha.getFicha(), reglon, 2);
@@ -780,6 +781,8 @@ public class Principal extends javax.swing.JFrame {
         else if(Fila2>=0){
             //eliminar de la cola al usuario atendido(objeto ficha)
             Ficha=(Fichas) PrioridadNP.dequeue();
+            tENoPerecedero+=((System.currentTimeMillis()-Ficha.getTiempo())/1000);
+            System.out.println(tENoPerecedero);
         
         int reglon = jTable2.getSelectedRow();
         ventanilla2.setValueAt("Atendiendo", reglon, 1);
@@ -831,7 +834,7 @@ public class Principal extends javax.swing.JFrame {
                 default:
                     break;
             }
-        Fichas FichaS = new Fichas(TUsuario,(String) jTable2.getValueAt(Fila3, 2));
+        Fichas FichaS = new Fichas(TUsuario,(String) jTable2.getValueAt(Fila3, 2),System.currentTimeMillis());
         SeguridadNP.enqueue(FichaS, TUsuario - 1);
         ventanilla2.setValueAt("Libre", renglon, 1);
         ventanilla2.setValueAt("-", renglon, 2);
@@ -863,7 +866,7 @@ public class Principal extends javax.swing.JFrame {
                 default:
                     break;
             }
-        Fichas FichaS = new Fichas(TUsuario,(String) jTable1.getValueAt(Fila4, 2));
+        Fichas FichaS = new Fichas(TUsuario,(String) jTable1.getValueAt(Fila4, 2),System.currentTimeMillis());
         Seguridad.enqueue(FichaS, TUsuario - 1);
         ventanilla1.setValueAt("Libre", renglon, 1);
         ventanilla1.setValueAt("-", renglon, 2);
@@ -916,8 +919,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
-        sms mensaje = new sms();
-        mensaje = EnviarSMS();        // TODO add your handling code here:
+        //sms mensaje = new sms();
+       // mensaje = EnviarSMS();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
       
     /**
