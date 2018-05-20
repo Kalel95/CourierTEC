@@ -23,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
     DefaultTableModel ventanilla2= new DefaultTableModel();
     DefaultTableModel ventanilla3= new DefaultTableModel();
     DefaultTableModel ventanilla4= new DefaultTableModel();
+    DefaultTableModel ventanilla5= new DefaultTableModel();
     private static Fichas t;
     //creación de colas de prioridad
     ColaPrioridad PrioridadP=new ColaPrioridad(4);
@@ -39,6 +40,8 @@ public class Principal extends javax.swing.JFrame {
     static long tEPerecedero=0, tENoPerecedero=0, tESeguridad=0;
     int AtendidosTP=1; 
     int AtendidosTNP=1;
+    static Fichas Ficha;
+    //Fichas por defecto
     Fichas FichaSP = new Fichas(4, "Regular",System.currentTimeMillis());
     Fichas FichaS1P = new Fichas(3, "Embarazada",System.currentTimeMillis());
     Fichas FichaS11P = new Fichas(1, "Adulto",System.currentTimeMillis());
@@ -46,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
     Fichas FichaS12 = new Fichas(1, "Adulto",System.currentTimeMillis());
     Fichas FichaS112 = new Fichas(3, "Embarazada",System.currentTimeMillis());
     
-    static Fichas Ficha;
+    
     /**
      * Creates new form Principal
      */
@@ -66,9 +69,11 @@ public class Principal extends javax.swing.JFrame {
         ventanilla3.addColumn("Tipo de Usuario");
         ventanilla1.addColumn("Atendidos");
         ventanilla2.addColumn("Atendidos");
+        
         jTable1.setModel(ventanilla1);
         jTable2.setModel(ventanilla2);
         jTable3.setModel(ventanilla3);
+        
     }
     
     public class Hilos extends Thread{
@@ -221,7 +226,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(167, 162, 162));
         jLabel5.setText("Administración");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(1030, 400, 190, 32);
+        jLabel5.setBounds(890, 410, 190, 32);
 
         jButton1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButton1.setText("Retirar tiquete");
@@ -231,7 +236,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(50, 250, 120, 25);
+        jButton1.setBounds(20, 250, 120, 30);
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Nombre:");
@@ -246,12 +251,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setText("Tipo de Usuario:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(0, 180, 100, 17);
+        jLabel8.setBounds(10, 180, 100, 17);
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setText("Tipo de Paquete:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(0, 210, 110, 17);
+        jLabel9.setBounds(10, 210, 110, 17);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,9 +264,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(110, 120, 100, 20);
+        jTextField1.setBounds(120, 120, 100, 20);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(110, 150, 100, 20);
+        jTextField2.setBounds(120, 150, 100, 20);
 
         jComboBox1.setFont(new java.awt.Font("Calibri", 1, 11)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo ", "Discapacitado", "Adulto Mayor", "Mujer Embarazada", "Cliente Regular" }));
@@ -271,7 +276,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(110, 180, 100, 20);
+        jComboBox1.setBounds(120, 180, 100, 20);
 
         jComboBox2.setFont(new java.awt.Font("Calibri", 1, 11)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo", "Perecedero", "No perecedero" }));
@@ -281,7 +286,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(110, 210, 100, 20);
+        jComboBox2.setBounds(120, 210, 100, 20);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuracion Inicial", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 12))); // NOI18N
         jPanel1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
@@ -341,37 +346,38 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel12)))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)
+                        .addGap(17, 17, 17)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 46, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
                                 .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
                                 .addComponent(jLabel13)
                                 .addGap(24, 24, 24))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ButtonCantVent, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(ButtonCantVent, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,32 +391,35 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(jLabel11))
+                                .addComponent(jLabel12))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(FieldENoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonCantVent))
-                .addGap(0, 8, Short.MAX_VALUE))
+                                    .addComponent(FieldE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(17, 17, 17)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 36, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(ButtonCantVent)
+                        .addGap(20, 20, 20))))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(250, 90, 310, 230);
+        jPanel1.setBounds(260, 100, 330, 240);
 
         jTable1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -427,7 +436,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(590, 120, 360, 170);
+        jScrollPane1.setBounds(610, 120, 360, 170);
 
         jTable2.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -444,7 +453,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(960, 120, 350, 170);
+        jScrollPane2.setBounds(980, 120, 350, 170);
 
         jTable3.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
@@ -461,7 +470,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(60, 460, 500, 190);
+        jScrollPane3.setBounds(70, 520, 500, 120);
 
         Atender1.setBackground(new java.awt.Color(255, 0, 0));
         Atender1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
@@ -515,7 +524,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(950, 450, 130, 25);
+        jButton3.setBounds(910, 465, 130, 30);
 
         jButton2.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButton2.setText("Estadisticas");
@@ -525,42 +534,47 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(1150, 450, 130, 25);
+        jButton2.setBounds(800, 520, 130, 30);
 
         jButton4.setFont(new java.awt.Font("Calibri", 1, 11)); // NOI18N
         jButton4.setText("Cola");
         getContentPane().add(jButton4);
-        jButton4.setBounds(270, 370, 53, 23);
+        jButton4.setBounds(310, 360, 53, 23);
 
         jButton5.setFont(new java.awt.Font("Calibri", 1, 11)); // NOI18N
         jButton5.setText("Heap");
         getContentPane().add(jButton5);
-        jButton5.setBounds(477, 370, 60, 23);
+        jButton5.setBounds(440, 360, 60, 23);
 
         jButton6.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButton6.setText("Tiempo Promedio");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton6);
-        jButton6.setBounds(1050, 500, 130, 25);
+        jButton6.setBounds(1010, 520, 130, 30);
 
         jButton7.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jButton7.setText("Clientes Atendidos por Ventanilla");
         getContentPane().add(jButton7);
-        jButton7.setBounds(1010, 560, 210, 25);
+        jButton7.setBounds(870, 580, 210, 30);
 
         jButton8.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        jButton8.setText("Comenzar");
+        jButton8.setText("Atender");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton8);
-        jButton8.setBounds(610, 550, 100, 25);
+        jButton8.setBounds(80, 480, 100, 25);
 
         jLabel17.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel17.setText("Estructura:");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(380, 340, 60, 16);
+        jLabel17.setBounds(370, 360, 60, 16);
 
         jLabel20.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel20.setText("Perecederos");
@@ -572,14 +586,14 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel21);
         jLabel21.setBounds(1070, 90, 120, 20);
 
-        jButton10.setText("jButton10");
+        jButton10.setText("Enviar");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton10);
-        jButton10.setBounds(80, 310, 79, 23);
+        jButton10.setBounds(160, 250, 70, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -636,11 +650,12 @@ public class Principal extends javax.swing.JFrame {
         jComboBox2.setSelectedIndex(0);
         String info=("Ficha Creada"+"\nNombre: "+NuevaFicha.getNombre()+"\nCorreo: "+NuevaFicha.getCorreo()+"\nFicha: "+NuevaFicha.getFicha());
         JOptionPane.showMessageDialog(this, info);
+        
         //Agrega el objeto ficha a la cola de acuerdo a su prioridad de usuario
         PrioridadP.enqueue(NuevaFicha, NuevaFicha.getTipoUsuario()-1);
         TotalP+="\n "+NuevaFicha.getFicha();
         AtendidosP+=1;
-       
+        return;
         
         }
         else if(jComboBox2.getSelectedIndex()==2){
@@ -667,6 +682,7 @@ public class Principal extends javax.swing.JFrame {
         CantidadNP++;
         TotalNP+="\n "+NuevaFicha.getFicha();
         AtendidosNP+=1;
+        return;
         }
         
         
@@ -705,10 +721,11 @@ public class Principal extends javax.swing.JFrame {
         //crear ventanas en el quisco
         for(int i=0;i<cantVEntregas;i++) {
    
-            String Dato[]=new String[3];
+            String Dato[]=new String[5];
             Dato[0]= "Ventanilla "+cont1;
             Dato[1]="";
             Dato[2]="";
+            Dato[4]="0";
             ventanilla1.addRow(Dato);
             cont1++;
         }
@@ -728,6 +745,7 @@ public class Principal extends javax.swing.JFrame {
             ventanilla3.addRow(Dato);
             cont3++;
         }
+        
 
     }//GEN-LAST:event_ButtonCantVentActionPerformed
 
@@ -736,7 +754,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldENoPActionPerformed
 
     private void Atender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender1ActionPerformed
+        
         int Fila=jTable1.getSelectedRow();
+        if(PrioridadP.First()==null){
+             JOptionPane.showMessageDialog(null, "No hay usuarios en fila");
+             return;
+        }
+        
+        
         //indicar que debe seleccionar la ventana donde va a ser atentido el usuario
         if (Fila==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
         //atender al usuario en la ventana seleccionada
@@ -749,7 +774,18 @@ public class Principal extends javax.swing.JFrame {
         int reglon = jTable1.getSelectedRow();
         ventanilla1.setValueAt("Atendiendo", reglon, 1);
         ventanilla1.setValueAt(Ficha.getFicha(), reglon, 2);
-        ventanilla1.setValueAt(AtendidosTP, reglon, 4);
+        //ventanilla1.setValueAt(AtendidosTP, reglon, 4);
+        
+        /*int nAtendidosV = Integer.parseInt((String) ventanilla2.getValueAt(Fila, 4));
+             nAtendidosV= nAtendidosV+1;
+             String numAtendidosV = Integer.toString(nAtendidosV);
+            //String numAtendidosV= nAtendidosV+"";
+            
+            ventanilla1.setValueAt(numAtendidosV, reglon, 4);
+               for(int i=0;jTable1.getRowCount()>i;i++){
+                   System.out.println("Ventanilla1 "+i+" "+ventanilla1.getValueAt(i, 4));
+               }*/
+        
         String TUsuario = "";
         int infTable = (int) Ficha.getTipoUsuario();
             switch (infTable) {
@@ -776,7 +812,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void Atender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atender2ActionPerformed
         int Fila2=jTable1.getSelectedRow();
-        if (Fila2==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
+        if(PrioridadNP.First()==null){
+             JOptionPane.showMessageDialog(null, "No hay usuarios en fila");
+             return;
+        }
+        
+        else if (Fila2==-1) JOptionPane.showMessageDialog(null, "Seleccione la ventanilla donde desea ser atendido");
         //atender al usuario en la ventana seleccionada
         else if(Fila2>=0){
             //eliminar de la cola al usuario atendido(objeto ficha)
@@ -883,12 +924,38 @@ public class Principal extends javax.swing.JFrame {
         EstadoNP = String.valueOf(CantidadNP);
         Fichas FichaSigP=(Fichas) PrioridadP.First();
         Fichas FichaSigNP=(Fichas) PrioridadNP.First();
-        
+        if(FichaSigP==null&&FichaSigNP==null){
+            String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
+                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+"\n"+
+                "\nSiguiente en la cola Perecederos: "+"Vacio"+"\nSiguiente en la cola No Perecederos: "+
+                "Vacio";
+            JOptionPane.showMessageDialog(this, Estados);
+            return;
+        }
+        else if(FichaSigP==null){
+            String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
+                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+"\n"+
+                "\nSiguiente en la cola Perecederos: "+"Vacio"+"\nSiguiente en la cola No Perecederos: "+
+                FichaSigNP.getFicha();
+            JOptionPane.showMessageDialog(this, Estados);
+            return;
+        }
+        else if(FichaSigNP==null){
+            String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
+                "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+"\n"+
+                "\nSiguiente en la cola Perecederos: "+FichaSigP.getFicha()+"\nSiguiente en la cola No Perecederos: "+
+                "Vacio";
+            JOptionPane.showMessageDialog(this, Estados);
+            return;
+        }
+        else{
         String Estados="Cantidad en Perecederos: "+EstadoP+"\n"+"\nCantidad en No Perecederos: "+EstadoNP+"\n"+
                 "\nFichas de clientes en Perecederos: "+TotalP+"\nFichas de clientes en No Perecederos: "+TotalNP+"\n"+
                 "\nSiguiente en la cola Perecederos: "+FichaSigP.getFicha()+"\nSiguiente en la cola No Perecederos: "+
                 FichaSigNP.getFicha();
         JOptionPane.showMessageDialog(this, Estados);
+        return;
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -902,6 +969,7 @@ public class Principal extends javax.swing.JFrame {
                 "\n Adultos Mayores atendidos: "+CMNP+"\nMujeres Embarazadas atendidas: "+CENP+"\nUsuarios Regulares atendidos: "+CRNP;
         
         JOptionPane.showMessageDialog(this, Estadist);
+        return;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -922,6 +990,10 @@ public class Principal extends javax.swing.JFrame {
         //sms mensaje = new sms();
        // mensaje = EnviarSMS();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
       
     /**
      * @param args the command line arguments
