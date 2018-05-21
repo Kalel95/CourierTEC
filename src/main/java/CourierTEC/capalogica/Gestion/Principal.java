@@ -5,6 +5,9 @@
  */
 package CourierTEC.capalogica.Gestion;
 import CourierTEC.capalogica.estructuraDatos.ColaPrioridad;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -142,7 +145,22 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }
-    
+    public class sms { 
+    private final static String ACCOUNT_SID = "ACc6785efb7a6e1aa1198ba554af5b449d"; 
+    private final static String AUTH_TOKEN = "f06648034582dcd95a8c60d6d7dc730a"; 
+ 
+    public void enviarSMS() { 
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        String Numero = "+50663420702";
+        String Texto = "Ficha creada";
+
+	    Message message = Message.creator( new PhoneNumber(Numero),new PhoneNumber("+18603002179"),
+	        
+	        Texto).create();
+
+	    System.out.println(message.getSid());
+    } 
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -994,8 +1012,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
-        //sms mensaje = new sms();
-       // mensaje = EnviarSMS();        // TODO add your handling code here:
+        sms mensaje = new sms();
+        mensaje.enviarSMS();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

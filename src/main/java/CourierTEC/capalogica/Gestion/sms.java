@@ -5,16 +5,12 @@
  */
 package CourierTEC.capalogica.Gestion;
 
- 
+// author dVaglio
+
 import com.twilio.Twilio; 
 import com.twilio.rest.api.v2010.account.Message; 
-import com.twilio.rest.api.v2010.account.MessageCreator; 
 import com.twilio.type.PhoneNumber; 
  
-import java.math.BigDecimal; 
-import java.net.URI; 
-import java.util.ArrayList; 
-import java.util.List; 
  
 public class sms { 
     private final static String ACCOUNT_SID = "ACc6785efb7a6e1aa1198ba554af5b449d"; 
