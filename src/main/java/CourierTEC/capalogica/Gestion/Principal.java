@@ -38,17 +38,10 @@ public class Principal extends javax.swing.JFrame {
     int CDP=0;int CMP=0;int CEP=0;int CRP=0;
     int CDNP=0;int CMNP=0;int CENP=0;int CRNP=0;
     static int rango1=0, rango2=0;
-    static long tEPerecedero=0, tENoPerecedero=0, tESeguridad=0;
+    static long tEPerecedero=0, tENoPerecedero=0, tESeguridad=0, AtendidosSeg=0;
     int AtendidosTP=1; 
     int AtendidosTNP=1;
     static Fichas Ficha;
-    //Fichas por defecto
-    Fichas FichaSP = new Fichas(4, "Regular",System.currentTimeMillis());
-    Fichas FichaS1P = new Fichas(3, "Embarazada",System.currentTimeMillis());
-    Fichas FichaS11P = new Fichas(1, "Adulto",System.currentTimeMillis());
-    Fichas FichaS2 = new Fichas(4, "Regular",System.currentTimeMillis());
-    Fichas FichaS12 = new Fichas(1, "Adulto",System.currentTimeMillis());
-    Fichas FichaS112 = new Fichas(3, "Embarazada",System.currentTimeMillis());
     
     
     /**
@@ -92,6 +85,7 @@ public class Principal extends javax.swing.JFrame {
                     atendiendo =(ColaPrioridad) Seguridad1.dequeue();
                     while(atendiendo.First()!=null){
                         atendiendo1 = (Fichas) atendiendo.dequeue();
+                        AtendidosSeg++;
                         tESeguridad+=((System.currentTimeMillis()-atendiendo1.getTiempo())/1000);
                         System.out.println(tESeguridad+"tiempo");
                         if(Fila==ventanilla3.getRowCount()) Fila=0;
@@ -961,7 +955,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Mostrar las estadisticas de usuarios atendidos 
-        String Estadist="Fichas dispensadas en Perecederos:\t  "+AtendidosP+"\nFichas dispensadas en "
+        String EstTiempo = "La cantidad de atendidos de alguna de las colas es igual a cero por lo que no se puede mostrar la estadistica de tiempo";
+        if(AtendidosP!=0&&AtendidosNP!=0&&AtendidosSeg!=0){
+            EstTiempo="Promedio de espera en Entregas de Perecederos: "+(tEPerecedero/AtendidosP)+"\n Promedio de espera en Entregas de No Perecederos: "+(tENoPerecedero/AtendidosNP)+"\n Promedio de espera en Seguridad: "+(tESeguridad/AtendidosSeg);
+        }
+        
+        String Estadist=EstTiempo
+                +"\nFichas dispensadas en Perecederos:\t  "+AtendidosP+"\nFichas dispensadas en "
                 + "No Perecederos: "+AtendidosNP+"\n"+"\nUsuarios Regulares atendidos:"+TotalR+"\nAdultos mayores atendidos:"+
                 TotalM+"\nUsuarios Discapacitados atendidos:"+TotalD+"\nMujeres embarazadas atendidas:"+TotalE+"\n"+
                 "\nUsuarios atendidos en Perecederos:"+"\nUsuarios Discapacitados atendidos: "+CDP+
@@ -974,14 +974,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        Seguridad.enqueue(FichaSP, 3);
-        Seguridad.enqueue(FichaS1P, 1);
-        Seguridad.enqueue(FichaS11P, 2);
-        SeguridadNP.enqueue(FichaS2, 3);
-        SeguridadNP.enqueue(FichaS12, 1);
-        SeguridadNP.enqueue(FichaS112, 2);
-        
+        // TODO add your handling code here:        
         Hilos hilo = new Hilos();
         hilo.start();
     }//GEN-LAST:event_jButton8ActionPerformed
