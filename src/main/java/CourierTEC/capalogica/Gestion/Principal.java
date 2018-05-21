@@ -986,13 +986,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Mostrar las estadisticas de usuarios atendidos 
-        String EstTiempo = "La cantidad de atendidos de alguna de las colas es igual a cero por lo que no se puede mostrar la estadistica de tiempo";
-        if(AtendidosP!=0&&AtendidosNP!=0&&AtendidosSeg!=0){
-            EstTiempo="Promedio de espera en Entregas de Perecederos: "+(tEPerecedero/AtendidosP)+"\n Promedio de espera en Entregas de No Perecederos: "+(tENoPerecedero/AtendidosNP)+"\n Promedio de espera en Seguridad: "+(tESeguridad/AtendidosSeg);
-        }
         
-        String Estadist=EstTiempo
-                +"\nFichas dispensadas en Perecederos:\t  "+AtendidosP+"\nFichas dispensadas en "
+        String Estadist="\nFichas dispensadas en Perecederos:\t  "+AtendidosP+"\nFichas dispensadas en "
                 + "No Perecederos: "+AtendidosNP+"\n"+"\nUsuarios Regulares atendidos:"+TotalR+"\nAdultos mayores atendidos:"+
                 TotalM+"\nUsuarios Discapacitados atendidos:"+TotalD+"\nMujeres embarazadas atendidas:"+TotalE+"\n"+
                 "\nUsuarios atendidos en Perecederos:"+"\nUsuarios Discapacitados atendidos: "+CDP+
@@ -1018,6 +1013,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        String EstTiempo = "La cantidad de atendidos de alguna de las colas es igual a cero por lo que no se puede mostrar la estadistica de tiempo";
+        if(AtendidosP!=0&&AtendidosNP!=0&&AtendidosSeg!=0){
+            EstTiempo="Promedio de espera en Entregas de Perecederos: "+(tEPerecedero/AtendidosP)+"\n Promedio de espera en Entregas de No Perecederos: "+(tENoPerecedero/AtendidosNP)+"\n Promedio de espera en Seguridad: "+(tESeguridad/AtendidosSeg);
+        }
+        
+        String Estadist1=EstTiempo;
+        
+        JOptionPane.showMessageDialog(this, Estadist1);
+        return;
     }//GEN-LAST:event_jButton6ActionPerformed
       
     /**
