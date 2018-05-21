@@ -98,9 +98,22 @@ public class Principal extends javax.swing.JFrame {
                             System.out.println(ventanilla3.getRowCount()+"fila");
                             System.out.println(Fila+"fila");
                             System.out.println(duracion);
+                            String tipU="";
+                            if (atendiendo1.getTipoUsuario()==1){
+                                tipU="Discapacitado";
+                            }
+                            else if (atendiendo1.getTipoUsuario()==2){
+                                tipU="AdultoMayor";
+                            }
+                            else if (atendiendo1.getTipoUsuario()==3){
+                                tipU="Embarazada";
+                            }
+                            else if (atendiendo1.getTipoUsuario()==2){
+                                tipU="Regular";
+                            }
                             ventanilla3.setValueAt("Atendiendo", Fila, 1);
                             ventanilla3.setValueAt(atendiendo1.getFicha(), Fila, 2);
-                            ventanilla3.setValueAt(atendiendo1.getTipoUsuario(), Fila, 3);
+                            ventanilla3.setValueAt(tipU, Fila, 3);
                             jTable3.setModel(ventanilla3);
                             Fila++;
                             try {
