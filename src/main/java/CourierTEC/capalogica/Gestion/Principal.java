@@ -16,7 +16,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Principal extends javax.swing.JFrame {
     //declaración de contadores para asignar el número de ficha
-    int NFicha=0, NFicha2=0,CantidadP=0,CantidadNP=0,AtendidosP=0,AtendidosNP=0;
+    int NFicha=0, NFicha2=0,CantidadP=0,CantidadNP=0;
+    long AtendidosP=0,AtendidosNP=0;
     String TotalP="",TotalNP="";      
     int TotalD=0;int TotalM=0;int TotalE=0;int TotalR=0;
     DefaultTableModel ventanilla1= new DefaultTableModel();
